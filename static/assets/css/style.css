@@ -1271,13 +1271,12 @@ section {
 # Footer
 --------------------------------------------------------------*/
 #footer {
-  background: url("../img/footer-bg.jpg") top center no-repeat;
-  background-size: cover;
   color: #fff;
   font-size: 14px;
   text-align: center;
-  padding: 80px 0;
+  padding: 20px 0;
   position: relative;
+  background-color: black;
 }
 
 #footer::before {
@@ -1287,7 +1286,7 @@ section {
   right: 0;
   top: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 1);
 }
 
 #footer .container {
@@ -1305,21 +1304,23 @@ section {
 }
 
 #footer p {
-  font-size: 15;
-  font-style: italic;
+  font-size: 25px;
   padding: 0;
-  margin: 0 0 40px 0;
+  margin: 0 0 10px 0;
+  font-family: "Raleway", sans-serif;
+  color: #fff;
+  font-weight: bold;
 }
 
 #footer .social-links {
-  margin: 0 0 40px 0;
+  margin: 0 0 20px 0;
 }
 
 #footer .social-links a {
   font-size: 18px;
   display: inline-block;
-  background: #ffb727;
-  color: #fff;
+  background: #fff;
+  color: #000;
   line-height: 1;
   padding: 8px 0;
   margin-right: 4px;
@@ -1394,6 +1395,7 @@ section {
 
 
 
+
 .skills-item {
   margin-bottom: 15px;
 }
@@ -1433,4 +1435,8 @@ section {
 
 .coursera{
   color: black;
+}
+
+.sentence{
+  font-weight: bold;
 }

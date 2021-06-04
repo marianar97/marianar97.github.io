@@ -1,12 +1,12 @@
 {%include 'base.html'%}
 
-{%block body%}
+
 <section id="hero">
     <div class="hero-container">
       <h1>Mariana Ramirez Duque</h1>
       <div class="typing-container">
         <p>
-          <span id="sentence" class="sentence"></span><span id="sentence2" class="sentence2"></span>
+          <span id="sentence" class="sentence">I am a </span><span id="sentence2" class="sentence2"></span>
           <span class="input-cursor"></span>
         </p>
       </div>
@@ -14,50 +14,16 @@
       <a href="#about" class="btn-scroll scrollto" title="Scroll Down"><i class="bx bx-chevron-down"></i></a>
     </div>
   </section><!-- End Hero -->
-  <section id="resume" class="resume">
+  <script src='../static/assets/js/type.js'></script>
 
-    <script>
-      const words = ["Developer", "Data Analyst", "Freelancer"];
-      let i = 0;
-      let counter;
-      function typeNow() {
-         let word = words[i].split("");
-         var loopTyping = function() {
-            if (word.length > 0) {
-               document.getElementById('sentence').innerHTML += word.shift();
-            } else {
-               deleteNow();
-               return false;
-            };
-            counter = setTimeout(loopTyping, 200);
-         };
-         loopTyping();
-      };
-      function deleteNow() {
-         let word = words[i].split("");
-         var loopDeleting = function() {
-            if (word.length > 0) {
-               word.pop();
-               document.getElementById('sentence').innerHTML = word.join("");
-            } else {
-               if (words.length > (i + 1)) {
-                  i++;
-               }
-               else {
-                  i = 0;
-               };
-               typeNow();
-               return false;
-            };
-            counter = setTimeout(loopDeleting, 200);
-         };
-         loopDeleting();
-      };
-      typeNow();
-      </script>
+
   {% include 'resume.html' %}
+  {% include 'portfolio.html' %}
 
-{% endblock %}  
+
+
+{% include 'footer.html' %}
+
 
 
 
