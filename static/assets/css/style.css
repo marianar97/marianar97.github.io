@@ -879,7 +879,13 @@ section {
 }
 
 .portfolio .portfolio-item .portfolio-img img {
-  transition: all 0.8s ease-in-out;
+  transition: all 0.8s ease-in-out;  
+  float: left;
+  width:  500px;
+  height: 300px;
+  background-size: cover;
+  border: 2px solid black;
+
 }
 
 .portfolio .portfolio-item .portfolio-info {
