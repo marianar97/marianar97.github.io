@@ -719,8 +719,7 @@ select {
 
 .about .about-content .timeline .timeline-title {
     font-weight: 700;
-    font-size: 18px;
-    margin-bottom: 15px;
+    font-size: 1.2rem;
     text-transform: capitalize;
     color: #302e4d;
 }
@@ -885,6 +884,15 @@ select {
     display: block;
 }
 
+.portfolio-img{
+    /* max-height: 200px; */
+}
+
+.portfolio-img img {
+    max-height: 200px;
+}
+
+
 .portfolio .portfolio-item .portfolio-info {
     position: absolute;
     top: 0;
@@ -903,6 +911,10 @@ select {
     opacity: 1;
 }
 
+.portfolio-item:hover .portfolio-info {
+    opacity: 1;
+}
+
 .portfolio .portfolio-item .portfolio-info h4 {
     font-size: 18px;
     font-weight: 700;
@@ -916,6 +928,12 @@ select {
 }
 
 .portfolio .portfolio-item-inner:hover .portfolio-info h4 {
+    transform: translate(0px);
+    -webkit-transform: translate(0px);
+    opacity: 1;
+}
+
+.portfolio-item:hover .portfolio-info h4 {
     transform: translate(0px);
     -webkit-transform: translate(0px);
     opacity: 1;
@@ -938,6 +956,12 @@ select {
 }
 
 .portfolio .portfolio-item-inner:hover .portfolio-info .icon {
+    transform: translate(0px);
+    -webkit-transform: translate(0px);
+    opacity: 1;
+}
+
+.portfolio .portfolio-item:hover .portfolio-info .icon {
     transform: translate(0px);
     -webkit-transform: translate(0px);
     opacity: 1;
@@ -1324,4 +1348,113 @@ select {
         -ms-flex: 0 0 100%;
         max-width: 100%;
     }
+}
+
+.parent-container {
+    display: block; /* Default stacking behavior */
+    text-align: center; /* Optional: Center align content */
+}
+
+.cartoon-image{
+    margin-top: 50px;
+}
+
+@media(min-width: 1200px) {
+    .parent-container{
+        display: flex;
+        /* border: 1px solid black; */
+    }
+}
+
+.cartoon-image{
+    width:50%;
+    /* border: 1px solid blue; */
+}
+
+.personal-info{
+    /* border: 1px solid red; */
+}
+
+.hello h1 {
+    white-space: nowrap;
+    display: inline-block;
+    margin: 0;
+    font-size: 2.5rem;
+}
+
+.hello p {
+    font-size: 2rem;
+}
+
+
+.hello{
+    text-align: center;
+}
+
+.social-links{
+    margin-top: 2%;
+    display: flex;
+    justify-content: center;
+}
+
+.social-links a {
+    display: inline-block;
+    width: 50px; /* Size of the circle */
+    height: 50px;
+    line-height: 50px; /* Centers the icon vertically */
+    text-align: center; /* Centers the icon horizontally */
+    margin: 0 5px;
+    border-radius: 50%; /* Makes the background a circle */
+    color: white; /* Icon color */
+    font-size: 24px; /* Icon size */
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.social-links a:hover {
+    transform: scale(1.1); /* Slightly increase size on hover */
+}
+
+/* Specific colors for each social icon */
+.github {
+    background-color: #333333;
+}
+
+.gitlab {
+    background-color: #fca326;
+}
+
+.linkedin {
+    background-color: #0077b5;
+}
+
+.google {
+    background-color: #db4437;
+}
+
+.twitter {
+    background-color: #1da1f2;
+}
+
+.instagram {
+    background-color: #e4405f;
+}
+
+.university-title{
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+}
+
+.timeline div{
+    margin-bottom: 4%;
+}
+
+.portfolio-container{
+    background-color: white;
+    border-radius: 10px;
+}
+
+.portfolio-item{
+    display: flex;
+    align-items: center;
 }

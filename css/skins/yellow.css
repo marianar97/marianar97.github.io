@@ -20,7 +20,8 @@ body.dark .aside .nav li a:hover,
 body.dark .portfolio .portfolio-filter button.active,
 .service .service-item .service-item-inner .icon .fa,
 body.dark .aside .nav li a.active,
-.aside .nav li a.active{
+.aside .nav li a.active,
+.name{
     color: #ffb400;
 }
 

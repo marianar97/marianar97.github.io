@@ -8,42 +8,39 @@ window.addEventListener('load', function(){
     }, 1000);
 });
 
-// iTyped 
 
-window.ityped.init(document.querySelector('.iTyped'), {
-    strings: ["I'm a Web Developer", 'I Love Html5', 'I Love CSS3', 'I Love Jquery', 'I Love Laravel'],
-    loop: true
-});
+// // Portfolio Item Filter
 
-// Portfolio Item Filter
-
-const filterContainer = document.querySelector('.portfolio-filter'),
-    filterBtns = filterContainer.children,
-    totalFilterBtn = filterBtns.length,
-    portfolioItems = document.querySelectorAll('.portfolio-item'),
-    totalPortfolioItem = portfolioItems.length;
+// const filterContainer = document.querySelector('.portfolio-filter'),
+//     filterBtns = filterContainer.children,
+//     totalFilterBtn = filterBtns.length,
+//     portfolioItems = document.querySelectorAll('.portfolio-item'),
+//     totalPortfolioItem = portfolioItems.length;
     
-    for (let i = 0; i < totalFilterBtn; i++) {
-        filterBtns[i].addEventListener("click", function(){
-            filterContainer.querySelector('.active').classList.remove('active');
-            this.classList.add("active");
+//     for (let i = 0; i < totalFilterBtn; i++) {
+//         filterBtns[i].addEventListener("click", function(){
+//             filterContainer.querySelector('.active').classList.remove('active');
+//             this.classList.add("active");
 
-            const filterValue = this.getAttribute('data-filter');
-            for (let k = 0; k < totalPortfolioItem; k++) {
-                if (filterValue === portfolioItems[k].getAttribute('data-category')) {
-                    portfolioItems[k].classList.remove('hide');
-                    portfolioItems[k].classList.add('show');
-                } else{
-                    portfolioItems[k].classList.remove('show');
-                    portfolioItems[k].classList.add('hide');
-                }
-                if (filterValue === 'all') {
-                    portfolioItems[k].classList.remove('hide');
-                    portfolioItems[k].classList.add('show');
-                }
-            }
-        });
-    }
+//             const filterValue = this.getAttribute('data-filter');
+//             for (let k = 0; k < totalPortfolioItem; k++) {
+//                 if (filterValue === portfolioItems[k].getAttribute('data-category')) {
+//                     portfolioItems[k].classList.remove('hide');
+//                     portfolioItems[k].classList.add('show');
+//                 } else{
+//                     portfolioItems[k].classList.remove('show');
+//                     portfolioItems[k].classList.add('hide');
+//                 }
+//                 if (filterValue === 'all') {
+//                     portfolioItems[k].classList.remove('hide');
+//                     portfolioItems[k].classList.add('show');
+//                 }
+//             }
+//         });
+//     }
+
+portfolioItems = document.querySelectorAll('.portfolio-item'),
+totalPortfolioItem = portfolioItems.length;
 
 // Portfolio Lighbox
 
@@ -156,13 +153,13 @@ function updateNav(element)
     }
 }
 
-document.querySelector('.hire-me').addEventListener('click', function(){
-    const sectionIndex = this.getAttribute('data-section-index');
-    addBackSectionClass(sectionIndex);
-    showSection(this);
-    updateNav(this);
-    removeBackSectionClass();
-});
+// :document.querySelector('.hire-me').addEventListener('click', function(){
+//     const sectionIndex = this.getAttribute('data-section-index');
+//     addBackSectionClass(sectionIndex);
+//     showSection(this);
+//     updateNav(this);
+//     removeBackSectionClass();
+// });
 
 function showSection(element) 
 {
