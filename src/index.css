@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -33,22 +34,6 @@
     --ring: 222.2 84% 4.9%;
 
     --radius: 0.5rem;
-
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
   .dark {
@@ -79,14 +64,6 @@
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
   }
 }
 
@@ -96,6 +73,75 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground antialiased min-h-screen w-full;
+    font-family: 'Inter', 'sans-serif';
+    position: relative;
+    overflow-x: hidden;
   }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Glass morphism for main card */
+.glass-card {
+  @apply rounded-2xl shadow-glass bg-white/85 backdrop-blur-md border border-black/5;
+}
+
+@media (max-width: 768px) {
+  .glass-card {
+    @apply rounded-xl;
+  }
+}
+
+/* Background illustrations utility */
+.bg-drawings {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.bg-drawings__img {
+  position: absolute;
+  opacity: 0.11;
+  filter: grayscale(96%) blur(0.5px) contrast(1.1);
+  user-select: none;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+
+/* Main hero fade-in */
+.hero-fade-in {
+  animation: fade-in 1.1s cubic-bezier(0.4,0.3,0.53,1.13);
+}
+
+/* Elegant underline for main links */
+.story-link {
+  position: relative;
+  display: inline-block;
+}
+
+.story-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0.5px;
+  width: 100%;
+  height: 2px;
+  background: #111;
+  opacity: 0.13;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s cubic-bezier(0.4,0,0.2,1);
+}
+
+.story-link:hover::after,
+.story-link:focus::after {
+  transform: scaleX(1.03);
+  opacity: 0.23;
 }
