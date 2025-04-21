@@ -26,6 +26,18 @@ const Index = () => {
             <br className="hidden sm:block"/>
             Currently hacking, tinkering, and learning new crafts every day.
           </p>
+
+          {/* Currently Building Section */}
+          <div 
+            className="w-full max-w-xl bg-purple-100 rounded-lg p-6 mb-9 shadow-md text-center font-inter hero-fade-in"
+            style={{ animationDelay: "0.6s" }}
+          >
+            <h3 className="text-xl font-semibold text-purple-700 mb-3">Currently Building</h3>
+            <p className="text-purple-800 text-base max-w-lg mx-auto">
+              Excited to share ongoing projects, experiments, and collaborations coming to life here soon.
+            </p>
+          </div>
+
           {/* Main Links */}
           <div className="flex flex-wrap gap-7 mt-2 mb-1">
             <a
@@ -63,3 +75,4 @@ const Index = () => {
 };
 
 export default Index;
+
