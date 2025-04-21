@@ -1,4 +1,3 @@
-
 import React from "react";
 import BackgroundDrawings from "@/components/BackgroundDrawings";
 
@@ -27,19 +26,15 @@ const Index = () => {
             Currently hacking, tinkering, and learning new crafts every day.
           </p>
 
-          {/* Currently Building Section */}
-          <div 
-            className="w-full max-w-xl bg-purple-100 rounded-lg p-6 mb-9 shadow-md text-center font-inter hero-fade-in"
-            style={{ animationDelay: "0.6s" }}
-          >
-            <h3 className="text-xl font-semibold text-purple-700 mb-3">Currently Building</h3>
-            <p className="text-purple-800 text-base max-w-lg mx-auto">
-              Excited to share ongoing projects, experiments, and collaborations coming to life here soon.
-            </p>
-          </div>
-
           {/* Main Links */}
           <div className="flex flex-wrap gap-7 mt-2 mb-1">
+            {/* Currently Building tag */}
+            <a
+              className="story-link font-inter text-zinc-800 font-medium text-base transition-colors duration-150 hover:text-black focus:text-black currently-building-tag"
+              href="/currently-building"
+            >
+              Currently building
+            </a>
             <a
               className="story-link text-zinc-800 font-medium text-base transition-colors duration-150 hover:text-black focus:text-black"
               href="mailto:your@email.com"
@@ -75,4 +70,3 @@ const Index = () => {
 };
 
 export default Index;
-

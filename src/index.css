@@ -1,4 +1,3 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -144,4 +143,38 @@
 .story-link:focus::after {
   transform: scaleX(1.03);
   opacity: 0.23;
+}
+
+/* Rainbow hover effect for Currently building tag */
+.currently-building-tag {
+  position: relative;
+  z-index: 1;
+  background: transparent;
+  background-clip: border-box;
+  border-radius: 9999px;
+  padding: 0.25rem 0.88rem;
+  transition: color 0.19s;
+}
+
+.currently-building-tag:hover, .currently-building-tag:focus {
+  color: #fff !important;
+  background: linear-gradient(90deg, #8B5CF6 0%, #D946EF 33%, #F97316 66%, #0EA5E9 100%);
+  background-size: 200% 200%;
+  animation: rainbow-move 2s linear infinite;
+  box-shadow: 0 2px 12px 0 rgba(139, 92, 246, 0.14);
+}
+
+@keyframes rainbow-move {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Maintain same margin and layout as other links */
+.currently-building-tag {
+  height: 2rem;
+  line-height: 1.6rem;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
 }
