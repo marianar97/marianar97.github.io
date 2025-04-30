@@ -1,5 +1,7 @@
+
 import React from "react";
 import BackgroundDrawings from "@/components/BackgroundDrawings";
+import VoiceAgent from "@/components/VoiceAgent";
 
 const Index = () => {
   return (
@@ -79,6 +81,9 @@ const Index = () => {
           </span>
         </footer>
       </main>
+      
+      {/* Add the Voice Agent component */}
+      <VoiceAgent />
     </div>
   );
 };
