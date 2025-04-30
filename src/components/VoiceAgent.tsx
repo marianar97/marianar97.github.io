@@ -17,9 +17,9 @@ const VoiceAgent: React.FC<VoiceAgentProps> = ({ apiKey }) => {
   const [showApiKeyInput, setShowApiKeyInput] = useState(!apiKey);
   const [apiKeyInput, setApiKeyInput] = useState(apiKey || '');
   
-  // SpeechRecognition setup
-  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-  const recognition = SpeechRecognition ? new SpeechRecognition() : null;
+  // SpeechRecognition setup with proper type checking
+  const SpeechRecognitionAPI = window.SpeechRecognition || window.webkitSpeechRecognition;
+  const recognition = SpeechRecognitionAPI ? new SpeechRecognitionAPI() : null;
   
   if (recognition) {
     recognition.continuous = false;
