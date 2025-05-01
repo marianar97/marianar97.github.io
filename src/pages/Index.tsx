@@ -33,17 +33,17 @@ const Index = () => {
             Currently hacking, tinkering, and learning new crafts every day.
           </p>
           
-          {/* Contact AI Assistant Section - Enhanced */}
+          {/* Contact AI Assistant Section - Toned Down */}
           <div 
-            className="w-full text-center mb-6 hero-fade-in bg-gradient-to-r from-purple-50 to-indigo-50 p-4 rounded-lg border border-purple-100" 
+            className="w-full text-center mb-6 hero-fade-in" 
             style={{ animationDelay: "0.6s" }}
           >
-            <p className="text-base text-zinc-800/90 mb-3 font-medium">
-              ✨ Talk to my <span className="text-purple-600 font-semibold">AI Assistant</span> to book time with me:
+            <p className="text-base text-zinc-800/90 mb-3">
+              ✨ Talk to my <span className="text-purple-600 font-medium">AI Assistant</span> to book time with me:
             </p>
             <a 
               href="tel:+18669966263" 
-              className="inline-flex items-center justify-center gap-2 px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white font-medium rounded-lg transition-all transform hover:scale-105 shadow-sm"
+              className="inline-flex items-center justify-center gap-2 px-4 py-2 bg-gray-100 hover:bg-gray-200 text-zinc-800 font-medium rounded-lg transition-all"
             >
               <Phone className="h-4 w-4" />
               <span>+1 (866) 996-6263</span>
@@ -51,9 +51,10 @@ const Index = () => {
             </a>
           </div>
           
+          {/* Currently Building - Always Rainbow */}
           <div className="flex flex-col items-center justify-center">
             <a
-              className="story-link font-inter text-zinc-800 font-medium text-base transition-colors duration-150 hover:text-black focus:text-black currently-building-tag"
+              className="rainbow-button font-inter text-white font-medium text-base transition-colors duration-150"
               href="/currently-building"
             >
               Currently building
@@ -62,13 +63,6 @@ const Index = () => {
 
           {/* Main Links */}
           <div className="flex flex-wrap gap-7 mt-2 mb-1">
-            {/* Currently Building tag */}
-            {/* <a
-              className="story-link font-inter text-zinc-800 font-medium text-base transition-colors duration-150 hover:text-black focus:text-black currently-building-tag"
-              href="/currently-building"
-            >
-              Currently building
-            </a> */}
             <a
               className="story-link text-zinc-800 font-medium text-base transition-colors duration-150 hover:text-black focus:text-black"
               href="mailto:mariana.ramirezd97@gmail.com"
