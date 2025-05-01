@@ -31,6 +31,20 @@ const Index = () => {
             <br className="hidden sm:block" />
             Currently hacking, tinkering, and learning new crafts every day.
           </p>
+          
+          {/* Contact AI Assistant Section */}
+          <div className="w-full text-center mb-6 hero-fade-in" style={{ animationDelay: "0.6s" }}>
+            <p className="text-base text-zinc-800/90 mb-2">
+              Contact my AI assistant to book some time with me:
+            </p>
+            <a 
+              href="tel:+18669966263" 
+              className="text-lg font-medium text-purple-700 hover:text-purple-900 transition-colors"
+            >
+              +1 (866) 996-6263
+            </a>
+          </div>
+          
           <div className="flex flex-col items-center justify-center">
             <a
               className="story-link font-inter text-zinc-800 font-medium text-base transition-colors duration-150 hover:text-black focus:text-black currently-building-tag"
