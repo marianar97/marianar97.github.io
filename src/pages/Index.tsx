@@ -2,6 +2,7 @@
 import React from "react";
 import BackgroundDrawings from "@/components/BackgroundDrawings";
 import VoiceAgent from "@/components/VoiceAgent";
+import { Phone } from "lucide-react";
 
 const Index = () => {
   return (
@@ -32,16 +33,21 @@ const Index = () => {
             Currently hacking, tinkering, and learning new crafts every day.
           </p>
           
-          {/* Contact AI Assistant Section */}
-          <div className="w-full text-center mb-6 hero-fade-in" style={{ animationDelay: "0.6s" }}>
-            <p className="text-base text-zinc-800/90 mb-2">
-              Contact my AI assistant to book some time with me:
+          {/* Contact AI Assistant Section - Enhanced */}
+          <div 
+            className="w-full text-center mb-6 hero-fade-in bg-gradient-to-r from-purple-50 to-indigo-50 p-4 rounded-lg border border-purple-100" 
+            style={{ animationDelay: "0.6s" }}
+          >
+            <p className="text-base text-zinc-800/90 mb-3 font-medium">
+              ✨ Talk to my <span className="text-purple-600 font-semibold">AI Assistant</span> to book time with me:
             </p>
             <a 
               href="tel:+18669966263" 
-              className="text-lg font-medium text-purple-700 hover:text-purple-900 transition-colors"
+              className="inline-flex items-center justify-center gap-2 px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white font-medium rounded-lg transition-all transform hover:scale-105 shadow-sm"
             >
-              +1 (866) 996-6263
+              <Phone className="h-4 w-4" />
+              <span>+1 (866) 996-6263</span>
+              <span className="text-xs ml-1">(Tap to Call)</span>
             </a>
           </div>
           
