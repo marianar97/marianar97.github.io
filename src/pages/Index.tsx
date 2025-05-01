@@ -39,7 +39,7 @@ const Index = () => {
             style={{ animationDelay: "0.6s" }}
           >
             <p className="text-base text-zinc-800/90 mb-3">
-              ✨ Talk to my <span className="text-purple-600 font-medium">AI Assistant</span> to book time with me:
+              Talk to my AI Assistant to book time with me:
             </p>
             <a 
               href="tel:+18669966263" 
