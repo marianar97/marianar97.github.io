@@ -1,3 +1,4 @@
+
 import React from "react";
 import BackgroundDrawings from "@/components/BackgroundDrawings";
 
@@ -31,8 +32,10 @@ const Index = () => {
           </p>
           <div className="flex flex-col items-center justify-center">
             <a
-              className="story-link font-inter text-zinc-800 font-medium text-base transition-colors duration-150 hover:text-black focus:text-black currently-building-tag"
-              href="/currently-building"
+              className="rainbow-button font-inter text-white font-medium text-base transition-colors duration-150"
+              href="https://trymaggie.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
             >
               Currently building
             </a>
