@@ -33,7 +33,7 @@ const Index = () => {
           <div className="flex flex-col items-center justify-center">
             <a
               className="rainbow-button font-inter text-white font-medium text-base transition-colors duration-150"
-              href="https://trymaggie.vercel.app/"
+              href="https://trymaggie.site"
               target="_blank"
               rel="noopener noreferrer"
             >
