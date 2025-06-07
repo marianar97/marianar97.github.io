@@ -17,7 +17,7 @@ const Index = () => {
             className="text-lg sm:text-xl text-zinc-700 font-normal mb-8 font-inter hero-fade-in"
             style={{ animationDelay: "0.2s" }}
           >
-            Engineer &nbsp;&bull;&nbsp; Builder &nbsp;&bull;&nbsp; Explorer
+            Engineer &nbsp;&bull;&nbsp; Builder &nbsp;&bull;&nbsp; Inventor
           </h2>
           {/* Bio */}
           <p
@@ -37,7 +37,7 @@ const Index = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              Currently building
+              Currently building Maggie
             </a>
           </div>
 
