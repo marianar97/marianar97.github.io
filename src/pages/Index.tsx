@@ -17,12 +17,12 @@ import {
 const icons = [
   {
     name: "Home",
-    icon: <Home className="size-4" />,
+    icon: <Home className="size-6" />,
     link: "/",
   },
   {
     name: "Blog",
-    icon: <Pencil className="size-4" />,
+    icon: <Pencil className="size-6" />,
     link: "/blog",
   },
   {
@@ -34,6 +34,11 @@ const icons = [
     name: "LinkedIn",
     icon: <Icons.linkedin />,
     link: "https://www.linkedin.com/in/marianaramirezd",
+  },
+  {
+    name: "X",
+    icon: <Icons.x />,
+    link: "https://x.com/marianaramd",
   },
 ]
 const Index = () => {
