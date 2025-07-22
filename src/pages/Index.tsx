@@ -1,6 +1,17 @@
 
-import React from "react";
 import BackgroundDrawings from "@/components/BackgroundDrawings";
+import { Dock, DockIcon } from "@/components/magicui/dock";
+import { Home, Pencil } from "lucide-react";
+import { Link } from "react-router-dom";
+import { cn } from "@/lib/utils";
+import { buttonVariants } from "@/components/ui/button";
+import { Icons } from "@/components/Icons";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 const Index = () => {
   return (
@@ -24,57 +35,91 @@ const Index = () => {
             className="text-base text-zinc-800/80 mb-9 text-center leading-relaxed max-w-xl font-inter hero-fade-in"
             style={{ animationDelay: "0.4s" }}
           >
-            {/* Welcome to my digital garden. */}
-            <br />
             I build things at the intersection of code, design, and curiosity.
             <br className="hidden sm:block" />
             Currently hacking, tinkering, and learning new crafts every day.
           </p>
-          <div className="flex flex-col items-center justify-center">
-            <a
-              className="rainbow-button font-inter text-white font-medium text-base transition-colors duration-150"
-              href="https://trymaggie.site"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Currently building Maggie
-            </a>
-          </div>
-
-          {/* Main Links */}
-          <div className="flex flex-wrap gap-7 mt-2 mb-1">
-            {/* Currently Building tag */}
-            {/* <a
-              className="story-link font-inter text-zinc-800 font-medium text-base transition-colors duration-150 hover:text-black focus:text-black currently-building-tag"
-              href="/currently-building"
-            >
-              Currently building
-            </a> */}
-            <a
-              className="story-link text-zinc-800 font-medium text-base transition-colors duration-150 hover:text-black focus:text-black"
-              href="mailto:mariana.ramirezd97@gmail.com"
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              Email
-            </a>
-            <a
-              className="story-link text-zinc-800 font-medium text-base transition-colors duration-150 hover:text-black focus:text-black"
-              href="https://github.com/marianar97"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              GitHub
-            </a>
-            <a
-              className="story-link text-zinc-800 font-medium text-base transition-colors duration-150 hover:text-black focus:text-black"
-              href="https://linkedin.com/in/marianaramirezd"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              LinkedIn
-            </a>
-          </div>
+         
+          <TooltipProvider delayDuration={0}>
+            <Dock direction="middle">
+              <DockIcon>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Link
+                      to="/"
+                      aria-label="Home"
+                      className={cn(
+                        buttonVariants({ variant: "ghost", size: "icon" }),
+                        "size-12 rounded-full"
+                      )}
+                    >
+                      <Home className="size-4" />
+                    </Link>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>Home</p>
+                  </TooltipContent>
+                </Tooltip>
+              </DockIcon>
+              <DockIcon>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Link
+                      to="#"
+                      aria-label="Blog"
+                      className={cn(
+                        buttonVariants({ variant: "ghost", size: "icon" }),
+                        "size-12 rounded-full"
+                      )}
+                    >
+                      <Pencil className="size-4" />
+                    </Link>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>Blog</p>
+                  </TooltipContent>
+                </Tooltip>
+              </DockIcon>
+              <DockIcon>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Link
+                      to="#"
+                      aria-label="Projects"
+                      className={cn(
+                        buttonVariants({ variant: "ghost", size: "icon" }),
+                        "size-12 rounded-full"
+                      )}
+                    >
+                      <Icons.github />
+                    </Link>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>GitHub</p>
+                  </TooltipContent>
+                </Tooltip>
+              </DockIcon>
+              <DockIcon>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Link
+                      to="#"
+                      aria-label="Projects"
+                      className={cn(
+                        buttonVariants({ variant: "ghost", size: "icon" }),
+                        "size-12 rounded-full"
+                      )}
+                    >
+                      <Icons.linkedin />
+                    </Link>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>LinkedIn</p>
+                  </TooltipContent>
+                </Tooltip>
+              </DockIcon>
+            </Dock>
+          </TooltipProvider>
         </section>
         <footer className="w-full flex flex-col items-center justify-center mt-6 z-10">
           <span className="text-xs text-zinc-500/80 font-inter">
