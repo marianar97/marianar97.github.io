@@ -13,6 +13,29 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 
+
+const icons = [
+  {
+    name: "Home",
+    icon: <Home className="size-4" />,
+    link: "/",
+  },
+  {
+    name: "Blog",
+    icon: <Pencil className="size-4" />,
+    link: "/blog",
+  },
+  {
+    name: "GitHub",
+    icon: <Icons.github />,
+    link: "https://github.com/marianar97",
+  },
+  {
+    name: "LinkedIn",
+    icon: <Icons.linkedin />,
+    link: "https://www.linkedin.com/in/marianaramirezd",
+  },
+]
 const Index = () => {
   return (
     <div className="relative min-h-screen flex items-center justify-center overflow-hidden bg-white">
@@ -42,82 +65,20 @@ const Index = () => {
          
           <TooltipProvider delayDuration={0}>
             <Dock direction="middle">
-              <DockIcon>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Link
-                      to="/"
-                      aria-label="Home"
-                      className={cn(
-                        buttonVariants({ variant: "ghost", size: "icon" }),
-                        "size-12 rounded-full"
-                      )}
-                    >
-                      <Home className="size-4" />
-                    </Link>
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    <p>Home</p>
-                  </TooltipContent>
-                </Tooltip>
-              </DockIcon>
-              <DockIcon>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Link
-                      to="#"
-                      aria-label="Blog"
-                      className={cn(
-                        buttonVariants({ variant: "ghost", size: "icon" }),
-                        "size-12 rounded-full"
-                      )}
-                    >
-                      <Pencil className="size-4" />
-                    </Link>
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    <p>Blog</p>
-                  </TooltipContent>
-                </Tooltip>
-              </DockIcon>
-              <DockIcon>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Link
-                      to="#"
-                      aria-label="Projects"
-                      className={cn(
-                        buttonVariants({ variant: "ghost", size: "icon" }),
-                        "size-12 rounded-full"
-                      )}
-                    >
-                      <Icons.github />
-                    </Link>
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    <p>GitHub</p>
-                  </TooltipContent>
-                </Tooltip>
-              </DockIcon>
-              <DockIcon>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Link
-                      to="#"
-                      aria-label="Projects"
-                      className={cn(
-                        buttonVariants({ variant: "ghost", size: "icon" }),
-                        "size-12 rounded-full"
-                      )}
-                    >
-                      <Icons.linkedin />
-                    </Link>
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    <p>LinkedIn</p>
-                  </TooltipContent>
-                </Tooltip>
-              </DockIcon>
+              {icons.map((icon) => (
+                <DockIcon>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <Link to={icon.link} aria-label={icon.name} className={cn(buttonVariants({ variant: "ghost", size: "icon" }), "size-12 rounded-full")}>
+                        {icon.icon}
+                      </Link>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>{icon.name}</p>
+                    </TooltipContent>
+                  </Tooltip>
+                </DockIcon>
+              ))}
             </Dock>
           </TooltipProvider>
         </section>
