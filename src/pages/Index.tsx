@@ -17,27 +17,27 @@ import {
 const icons = [
   {
     name: "Home",
-    icon: <Home className="size-6" />,
+    icon: <Home style={{ width: "20px", height: "20px" }} />,
     link: "/",
   },
   {
     name: "Blog",
-    icon: <Pencil className="size-6" />,
+    icon: <Pencil style={{ width: "20px", height: "20px" }} />,
     link: "/blog",
   },
   {
     name: "GitHub",
-    icon: <Icons.github />,
+    icon: <Icons.github style={{ width: "20px", height: "20px" }} />,
     link: "https://github.com/marianar97",
   },
   {
     name: "LinkedIn",
-    icon: <Icons.linkedin />,
+    icon: <Icons.linkedin style={{ width: "20px", height: "20px" }} />,
     link: "https://www.linkedin.com/in/marianaramirezd",
   },
   {
     name: "X",
-    icon: <Icons.x />,
+    icon: <Icons.x style={{ width: "20px", height: "20px" }}/>,
     link: "https://x.com/marianaramd",
   },
 ]
