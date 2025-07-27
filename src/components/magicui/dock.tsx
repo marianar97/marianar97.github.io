@@ -7,7 +7,7 @@ import {
   useSpring,
   useTransform,
 } from "framer-motion";
-import React, { PropsWithChildren, useRef } from "react";
+import React, { PropsWithChildren, useRef, useEffect, useState } from "react";
 
 import { cn } from "@/lib/utils";
 
@@ -24,8 +24,13 @@ const DEFAULT_SIZE = 60;
 const DEFAULT_MAGNIFICATION = 90;
 const DEFAULT_DISTANCE = 140;
 
+// Mobile defaults - smaller magnification to prevent overflow
+const MOBILE_SIZE = 50;
+const MOBILE_MAGNIFICATION = 65;
+const MOBILE_DISTANCE = 100;
+
 const dockVariants = cva(
-  "supports-backdrop-blur:bg-white/10 supports-backdrop-blur:dark:bg-black/10 mx-auto flex h-[80px] w-max items-center justify-center gap-2 rounded-2xl  p-3 backdrop-blur-md"
+  "supports-backdrop-blur:bg-white/10 supports-backdrop-blur:dark:bg-black/10 mx-auto flex h-[80px] w-max items-center justify-center gap-2 rounded-2xl p-3 backdrop-blur-md"
 );
 
 const Dock = React.forwardRef<HTMLDivElement, DockProps>(
@@ -42,6 +47,25 @@ const Dock = React.forwardRef<HTMLDivElement, DockProps>(
     ref
   ) => {
     const mouseX = useMotionValue(Infinity);
+    const [isMobile, setIsMobile] = useState(false);
+    const [isTouch, setIsTouch] = useState(false);
+
+    useEffect(() => {
+      // Check if device is mobile
+      const checkMobile = () => {
+        setIsMobile(window.innerWidth <= 768);
+        setIsTouch('ontouchstart' in window);
+      };
+
+      checkMobile();
+      window.addEventListener('resize', checkMobile);
+      return () => window.removeEventListener('resize', checkMobile);
+    }, []);
+
+    // Adjust values for mobile
+    const adjustedSize = isMobile ? MOBILE_SIZE : iconSize;
+    const adjustedMagnification = isMobile ? MOBILE_MAGNIFICATION : iconMagnification;
+    const adjustedDistance = isMobile ? MOBILE_DISTANCE : iconDistance;
 
     const renderChildren = () => {
       return React.Children.map(children, (child) => {
@@ -52,26 +76,44 @@ const Dock = React.forwardRef<HTMLDivElement, DockProps>(
           return React.cloneElement(child, {
             ...child.props,
             mouseX: mouseX,
-            size: iconSize,
-            magnification: iconMagnification,
-            distance: iconDistance,
+            size: adjustedSize,
+            magnification: adjustedMagnification,
+            distance: adjustedDistance,
+            isMobile: isMobile,
+            isTouch: isTouch,
           });
         }
         return child;
       });
     };
 
+    const handleInteraction = (e: React.MouseEvent | React.TouchEvent) => {
+      if (isMobile || isTouch) {
+        // Disable magnification on mobile/touch devices
+        mouseX.set(Infinity);
+      } else if ('pageX' in e) {
+        mouseX.set(e.pageX);
+      }
+    };
+
     return (
       <motion.div
         ref={ref}
-        onMouseMove={(e) => mouseX.set(e.pageX)}
+        onMouseMove={handleInteraction}
         onMouseLeave={() => mouseX.set(Infinity)}
+        onTouchStart={() => isTouch && mouseX.set(Infinity)}
         {...props}
         className={cn(dockVariants({ className }), {
           "items-start": direction === "top",
           "items-center": direction === "middle",
           "items-end": direction === "bottom",
+          // Add overflow hidden on mobile to prevent icons from escaping
+          "overflow-hidden": isMobile,
         })}
+        style={{
+          // Ensure dock stays within viewport on mobile
+          maxWidth: isMobile ? 'calc(100vw - 2rem)' : undefined,
+        }}
       >
         {renderChildren()}
       </motion.div>
@@ -90,6 +132,8 @@ export interface DockIconProps
   className?: string;
   children?: React.ReactNode;
   props?: PropsWithChildren;
+  isMobile?: boolean;
+  isTouch?: boolean;
 }
 
 const DockIcon = ({
@@ -99,6 +143,8 @@ const DockIcon = ({
   mouseX,
   className,
   children,
+  isMobile = false,
+  isTouch = false,
   ...props
 }: DockIconProps) => {
   const ref = useRef<HTMLDivElement>(null);
@@ -110,10 +156,11 @@ const DockIcon = ({
     return val - bounds.x - bounds.width / 2;
   });
 
+  // Disable or reduce magnification on mobile/touch
   const sizeTransform = useTransform(
     distanceCalc,
     [-distance, 0, distance],
-    [size, magnification, size]
+    isMobile || isTouch ? [size, size, size] : [size, magnification, size]
   );
 
   const scaleSize = useSpring(sizeTransform, {
@@ -125,9 +172,15 @@ const DockIcon = ({
   return (
     <motion.div
       ref={ref}
-      style={{ width: scaleSize, height: scaleSize, padding }}
+      style={{ 
+        width: isMobile || isTouch ? size : scaleSize, 
+        height: isMobile || isTouch ? size : scaleSize, 
+        padding 
+      }}
       className={cn(
         "flex aspect-square cursor-pointer items-center justify-center rounded-full",
+        // Add active state for mobile
+        "transition-transform active:scale-95",
         className
       )}
       {...props}
