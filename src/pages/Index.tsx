@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/tooltip";
 
 
+
 const icons = [
   {
     name: "Home",
@@ -37,7 +38,7 @@ const icons = [
   },
   {
     name: "X",
-    icon: <Icons.x style={{ width: "20px", height: "20px" }}/>,
+    icon: <Icons.x style={{ width: "20px", height: "20px" }} />,
     link: "https://x.com/marianaramd",
   },
 ]
@@ -67,7 +68,7 @@ const Index = () => {
             <br className="hidden sm:block" />
             Currently hacking, tinkering, and learning new crafts every day.
           </p>
-         
+
           <TooltipProvider delayDuration={0}>
             <Dock direction="middle">
               {icons.map((icon) => (
