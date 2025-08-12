@@ -8,6 +8,7 @@ type MdxModule = {
         date?: string
         description?: string
         slug?: string
+        status?: string
     }
 }
 
@@ -39,6 +40,18 @@ export default function BlogPost() {
 
     const { Component, frontmatter } = entry
 
+    const isComplete = (frontmatter?.status ?? '').toLowerCase() === 'complete'
+    if (!isComplete) {
+        return (
+            <div className="min-h-screen bg-white p-8">
+                <div className="max-w-4xl mx-auto">
+                    <p className="text-black">This post is not yet published.</p>
+                    <Link to="/blog" className="text-blue-600 underline">Back to blog</Link>
+                </div>
+            </div>
+        )
+    }
+
     return (
         <div className="min-h-screen bg-white p-8">
             <div className="max-w-4xl mx-auto">
@@ -52,5 +65,6 @@ export default function BlogPost() {
         </div>
     )
 }
+
 
 

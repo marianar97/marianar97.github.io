@@ -7,6 +7,7 @@ type MdxModule = {
         date?: string
         description?: string
         slug?: string
+        status?: string
     }
 }
 
@@ -21,8 +22,10 @@ const posts = Object.entries(modules)
             title: fm.title || fallbackSlug,
             date: fm.date || '',
             description: fm.description || '',
+            status: fm.status || '',
         }
     })
+    .filter((p) => (p.status ?? '').toLowerCase() === 'complete')
     .sort((a, b) => (a.date < b.date ? 1 : -1))
 
 export default function Blog() {
