@@ -39,7 +39,7 @@ export default function Blog() {
                     <div className="border-b border-gray-200 pb-6">
                         <h3 className="text-xl font-semibold text-black mb-2">
                             <a
-                                href="https://garden.marianar.tech"
+                                href="https://garden.marianard.com"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="hover:underline"
