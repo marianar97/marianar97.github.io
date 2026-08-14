@@ -32,11 +32,14 @@ jobs:
         
       - name: Build
         run: npm run build
+
+      - name: Add custom domain
+        run: cp CNAME out/CNAME
         
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './dist'
+          path: './out'
           
   deploy:
     runs-on: ubuntu-latest

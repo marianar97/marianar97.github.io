@@ -1,0 +1,110 @@
+@import "tailwindcss";
+
+:root {
+  --fg: #2c2c2c;
+  --fg-2: #888;
+  --fg-3: #aaa;
+  --bg: #fff;
+  --rule: #eee;
+}
+
+html {
+  font-size: 18px;
+}
+
+html,
+body {
+  font-family: var(--font-sans), ui-sans-serif, system-ui, -apple-system,
+    sans-serif;
+  font-weight: 400;
+  letter-spacing: -0.008em;
+  font-feature-settings: "kern" 1, "liga" 1;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: var(--fg);
+  background: var(--bg);
+}
+
+/* The original site forces the light palette in dark mode. */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --fg: #2c2c2c;
+    --bg: #fff;
+  }
+  body {
+    background: var(--bg);
+  }
+}
+
+::selection {
+  background: #e0e0e0;
+}
+
+.mono {
+  font-family: var(--font-mono), "SF Mono", Monaco, monospace;
+  font-weight: 500;
+}
+
+a.bio-link {
+  text-decoration: underline;
+  text-decoration-color: #ddd;
+  text-underline-offset: 2.5px;
+  transition: text-decoration-color 0.15s ease;
+}
+
+a.bio-link:hover {
+  text-decoration-color: var(--fg);
+}
+
+.social-icon {
+  color: var(--fg-3);
+  transition: color 0.15s ease;
+}
+
+.social-icon:hover {
+  color: var(--fg);
+}
+
+.work-row {
+  transition: opacity 0.15s ease;
+}
+
+.work-row:hover {
+  opacity: 0.6;
+}
+
+.work-row:hover .work-arrow {
+  transform: translateX(2px);
+}
+
+.work-arrow {
+  transition: transform 0.15s ease;
+}
+
+@keyframes enter {
+  0% {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.anim {
+  animation: enter 0.4s ease-out both;
+}
+
+.d1 {
+  animation-delay: 0s;
+}
+
+.d2 {
+  animation-delay: 0.05s;
+}
+
+.d3 {
+  animation-delay: 0.12s;
+}
