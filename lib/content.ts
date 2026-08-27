@@ -51,4 +51,9 @@ export const links: LinkItem[] = [
     date: "Aug 2026",
     href: "https://lilianweng.github.io/",
   },
+  {
+    title: "Ordinary Abundance",
+    date: "Aug 2026",
+    href: "https://ordinaryabundance.com/",
+  },
 ];
