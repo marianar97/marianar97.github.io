@@ -34,7 +34,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.variable} ${geistMono.variable}`}>
-      <body>{children}</body>
+      <body>
+        <div className="min-h-screen">
+          <main className="w-[80%] sm:w-[75%] md:w-[62%] lg:w-[50%] xl:w-[44%] 2xl:w-[36%] max-w-[560px] mx-auto px-6 pt-16 sm:pt-20 pb-20">
+            {children}
+          </main>
+        </div>
+      </body>
     </html>
   );
 }

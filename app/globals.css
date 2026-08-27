@@ -66,20 +66,21 @@ a.bio-link:hover {
   color: var(--fg);
 }
 
-.work-row {
+.nav-link {
+  color: var(--fg-2);
+  transition: color 0.15s ease;
+}
+
+.nav-link:hover {
+  color: var(--fg);
+}
+
+.link-row {
   transition: opacity 0.15s ease;
 }
 
-.work-row:hover {
+.link-row:hover {
   opacity: 0.6;
-}
-
-.work-row:hover .work-arrow {
-  transform: translateX(2px);
-}
-
-.work-arrow {
-  transition: transform 0.15s ease;
 }
 
 @keyframes enter {
