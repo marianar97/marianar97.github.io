@@ -7,10 +7,9 @@ export interface Social {
   href: string;
 }
 
-export interface WorkItem {
+export interface LinkItem {
   title: string;
   date: string;
-  source: string;
   href: string;
 }
 
@@ -46,3 +45,10 @@ export const bio: BioSegment[][] = [
   ],
 ];
 
+export const links: LinkItem[] = [
+  {
+    title: "Lil'Log (Lilian Weng) tech blog",
+    date: "Aug 2026",
+    href: "https://lilianweng.github.io/",
+  },
+];
