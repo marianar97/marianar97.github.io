@@ -135,6 +135,27 @@ img.portrait-media { cursor: default; }
 
 .portrait-media:focus-visible { outline: 2px solid var(--fg); outline-offset: 3px; }
 
+.portrait-spotify-link {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  /* Align beneath the artwork, accounting for the video's white border. */
+  margin: -12px 5% 0 auto;
+}
+
+.portrait-spotify-link:focus-visible { outline: 2px solid var(--fg); outline-offset: 3px; }
+
+.portrait-audio {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  pointer-events: none;
+}
+
 @media (min-width: 1100px) {
   .home-layout {
     grid-template-columns: minmax(0, 600px) minmax(0, 520px);

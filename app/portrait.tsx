@@ -3,6 +3,8 @@
 import Image from "next/image";
 import { useEffect, useId, useLayoutEffect, useRef, useState, useSyncExternalStore } from "react";
 import { createPortal } from "react-dom";
+import { FaSpotify } from "react-icons/fa";
+import { usePortraitAudio } from "./use-portrait-audio";
 
 const description = "Illustrated Medellín skyline surrounded by green hills, tropical leaves, and white flowers.";
 
@@ -68,6 +70,14 @@ export default function Portrait() {
     getAnimationEnabled,
     getServerAnimationEnabled,
   );
+  const {
+    hostRef: musicHostRef,
+    playing: musicPlaying,
+    unavailable: musicUnavailable,
+    start: startMusic,
+    pause: pauseMusic,
+    toggle: toggleMusic,
+  } = usePortraitAudio(animationEnabled && !unavailable);
 
   function play(video: HTMLVideoElement) {
     // Leaving before playback starts can abort play(); keep the portrait visible.
@@ -89,6 +99,7 @@ export default function Portrait() {
       }}
       onPointerLeave={hideTooltip}
       onFocus={(event) => {
+        if (!event.target.classList.contains("portrait-media")) return;
         const bounds = event.target.getBoundingClientRect();
         setAnchor({ x: bounds.left + bounds.width / 2, y: bounds.top });
         showTooltip();
@@ -108,22 +119,61 @@ export default function Portrait() {
           loop
           playsInline
           preload="metadata"
-          aria-label={description}
+          aria-label={`${description} Play or pause music.`}
+          role="button"
+          aria-pressed={musicPlaying}
           aria-describedby={tooltipVisible ? tooltipId : undefined}
           tabIndex={0}
-          onMouseEnter={(event) => play(event.currentTarget)}
-          onMouseLeave={(event) => event.currentTarget.pause()}
-          onFocus={(event) => play(event.currentTarget)}
-          onBlur={(event) => event.currentTarget.pause()}
+          onMouseEnter={(event) => {
+            play(event.currentTarget);
+            startMusic();
+          }}
+          onMouseLeave={(event) => {
+            event.currentTarget.pause();
+            pauseMusic();
+          }}
+          onFocus={(event) => {
+            play(event.currentTarget);
+            if (event.currentTarget.matches(":focus-visible")) startMusic();
+          }}
+          onBlur={(event) => {
+            event.currentTarget.pause();
+            pauseMusic();
+          }}
+          onClick={toggleMusic}
+          onKeyDown={(event) => {
+            if (event.key === "Enter" || event.key === " ") {
+              event.preventDefault();
+              if (!event.repeat) toggleMusic();
+            }
+          }}
           onError={() => setUnavailable(true)}
         >
           <source src="/images/medellin-portrait.mp4" type="video/mp4" />
           <a href="/images/medellin-portrait.gif">View the Medellín portrait</a>
         </video>
       )}
+      {animationEnabled && !unavailable && (
+        <>
+          <a
+            className="portrait-spotify-link social-icon"
+            href="https://open.spotify.com/playlist/1C71rB32iP5hL6anUEoi3D"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Open Spotify playlist (opens in a new tab)"
+            title="Listen on Spotify"
+            onPointerEnter={hideTooltip}
+            onFocus={hideTooltip}
+          >
+            <FaSpotify size={20} aria-hidden="true" />
+          </a>
+          <div ref={musicHostRef} className="portrait-audio" aria-hidden="true" inert />
+        </>
+      )}
       {tooltipVisible && createPortal(
         <span ref={tooltipRef} id={tooltipId} role="tooltip" className="portrait-tooltip">
           Medellin, Colombia
+          {musicUnavailable && " · Music unavailable"}
         </span>,
         document.body,
       )}
