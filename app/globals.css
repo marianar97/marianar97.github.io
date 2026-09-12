@@ -1,0 +1,195 @@
+@import "tailwindcss";
+
+:root {
+  --fg: #2c2c2c;
+  --fg-2: #888;
+  --fg-3: #aaa;
+  --bg: #fff;
+  --rule: #eee;
+}
+
+html {
+  font-size: 18px;
+}
+
+html,
+body {
+  font-family: var(--font-sans), ui-sans-serif, system-ui, -apple-system,
+    sans-serif;
+  font-weight: 400;
+  letter-spacing: -0.008em;
+  font-feature-settings: "kern" 1, "liga" 1;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: var(--fg);
+  background: var(--bg);
+}
+
+/* The original site forces the light palette in dark mode. */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --fg: #2c2c2c;
+    --bg: #fff;
+  }
+  body {
+    background: var(--bg);
+  }
+}
+
+::selection {
+  background: #e0e0e0;
+}
+
+.mono {
+  font-family: var(--font-mono), "SF Mono", Monaco, monospace;
+  font-weight: 500;
+}
+
+a.bio-link {
+  text-decoration: underline;
+  text-decoration-color: #ddd;
+  text-underline-offset: 2.5px;
+  transition: text-decoration-color 0.15s ease;
+}
+
+a.bio-link:hover {
+  text-decoration-color: var(--fg);
+}
+
+.social-icon {
+  color: var(--fg-3);
+  transition: color 0.15s ease;
+}
+
+.social-icon:hover {
+  color: var(--fg);
+}
+
+.nav-link {
+  color: var(--fg-2);
+  transition: color 0.15s ease;
+}
+
+.nav-link:hover {
+  color: var(--fg);
+}
+
+.link-row {
+  transition: opacity 0.15s ease;
+}
+
+.link-row:hover {
+  opacity: 0.6;
+}
+
+@keyframes enter {
+  0% {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.anim {
+  animation: enter 0.4s ease-out both;
+}
+
+.d1 {
+  animation-delay: 0s;
+}
+
+.d2 {
+  animation-delay: 0.05s;
+}
+
+.d3 {
+  animation-delay: 0.12s;
+}
+
+/* Widen only the homepage; the links page keeps its existing reading width. */
+.site-shell:has(.home-layout) {
+  width: 100%;
+  max-width: 1600px;
+  padding-inline: clamp(24px, 5vw, 72px);
+}
+
+.home-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  align-items: start;
+  justify-content: space-between;
+  gap: clamp(28px, 4vw, 64px);
+}
+
+.home-copy { min-width: 0; }
+.home-copy > div:first-child > div:first-child { flex-wrap: wrap; gap: 16px; }
+.home-copy > div:first-child > p { overflow-wrap: anywhere; }
+.home-portrait { position: relative; width: 100%; margin: 0; }
+.portrait-media { display: block; width: 100%; height: auto; border-radius: 6px; cursor: pointer; }
+
+img.portrait-media { cursor: default; }
+
+.portrait-media:focus-visible { outline: 2px solid var(--fg); outline-offset: 3px; }
+
+.portrait-spotify-link {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  /* Align beneath the artwork, accounting for the video's white border. */
+  margin: -12px 5% 0 auto;
+}
+
+.portrait-spotify-link:focus-visible { outline: 2px solid var(--fg); outline-offset: 3px; }
+
+.portrait-audio {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  pointer-events: none;
+}
+
+@media (min-width: 1100px) {
+  .home-layout {
+    grid-template-columns: minmax(0, 600px) minmax(0, 520px);
+    gap: clamp(64px, 8vw, 144px);
+  }
+}
+
+@media (max-width: 767px) {
+  .site-shell:has(.home-layout) { max-width: 608px; }
+  .home-layout { grid-template-columns: minmax(0, 1fr); gap: 48px; }
+  .home-portrait { max-width: 400px; margin-inline: auto; animation: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-layout .anim { animation: none; }
+}
+
+/* Portaled to the body so the portrait's entrance transform cannot offset it. */
+.portrait-tooltip {
+  position: fixed;
+  z-index: 100;
+  visibility: hidden;
+  width: max-content;
+  max-width: calc(100vw - 16px);
+  padding: 4px 12px;
+  border: 0;
+  border-radius: 999px;
+  background: rgb(60 60 60 / 62%);
+  color: #fff;
+  font-size: 14px;
+  line-height: 20px;
+  text-align: center;
+  pointer-events: none;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 2px 8px rgb(0 0 0 / 8%);
+}
