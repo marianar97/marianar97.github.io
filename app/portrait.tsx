@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useEffect, useId, useLayoutEffect, useRef, useState, useSyncExternalStore } from "react";
 import { createPortal } from "react-dom";
 import { FaSpotify } from "react-icons/fa";
-import { usePortraitAudio } from "./use-portrait-audio";
+import { SPOTIFY_IFRAME_API_URL, usePortraitAudio } from "./use-portrait-audio";
 
 const description = "Illustrated Medellín skyline surrounded by green hills, tropical leaves, and white flowers.";
 
@@ -107,6 +107,8 @@ export default function Portrait() {
       onBlur={hideTooltip}
       onKeyDown={(event) => { if (event.key === "Escape") hideTooltip(); }}
     >
+      {/* React puts this in the initial document head, before hydration starts. */}
+      <link rel="preload" as="script" href={SPOTIFY_IFRAME_API_URL} media={animationQuery} />
       {unavailable || !animationEnabled ? (
         <Image src="/images/medellin-poster-video.png" alt={description} aria-describedby={tooltipVisible ? tooltipId : undefined} width={544} height={720} unoptimized className="portrait-media" />
       ) : (
