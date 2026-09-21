@@ -1,0 +1,9 @@
+Generated using the built-in image_gen tool.
+
+Use case: logo-brand
+Asset type: personal brand bread icon for a website and avatar.
+Primary request: Create a single distinctive, beautifully simple bread icon. A softly rounded artisan loaf with three bold, curved scoring cuts, a confident compact silhouette, and subtly organic contours. Friendly and timeless, with the clarity and restraint of a professionally designed brand mark.
+Style/medium: flat vector-style graphic with crisp clean edges, minimal solid shapes, no fine details; recognizable at favicon size.
+Composition: one isolated icon centered on a square canvas, generous even clear space around it; icon occupies about 70 percent of canvas width.
+Scene/backdrop: genuinely transparent background with alpha.
+Constraints: bread only, no lettering, no words, no border or badge, no face, no extra objects, no gradients, no texture, no shadow, no mockup, no watermark. Deliver one finished mark.
