@@ -14,8 +14,8 @@
 .caption { position: absolute; top: 100%; left: -12px; right: -12px; text-align: center; padding: 10px 0; font-size: 12px; line-height: 1.6; opacity: 0; transform: translateY(-3px); transition: opacity .2s, transform .2s; pointer-events: none; }
 .caption small { font-size: 11px; color: var(--fg-2); }
 .item:hover .caption, .item:focus-visible .caption { opacity: 1; transform: none; }
-.volume { --book-w: 210px; --book-h: 315px; --book-d: 40px; width: var(--book-w); height: var(--book-h); position: relative; transform-style: preserve-3d; flex-shrink: 0; }
-.shelfVolume { --book-w: 134px; --book-h: 201px; --book-d: 24px; transform: rotateY(-25deg) rotateZ(var(--lean)); transform-origin: 50% 100%; transition: transform .65s cubic-bezier(.2,.75,.25,1); }
+.volume { --book-w: 210px; --book-h: calc(var(--book-w) * var(--cover-ratio, 1.5)); --book-d: 40px; width: var(--book-w); height: var(--book-h); position: relative; transform-style: preserve-3d; flex-shrink: 0; }
+.shelfVolume { --book-w: 134px; --book-h: calc(var(--book-w) * var(--cover-ratio, 1.5)); --book-d: 24px; transform: rotateY(-25deg) rotateZ(var(--lean)); transform-origin: 50% 100%; transition: transform .65s cubic-bezier(.2,.75,.25,1); }
 .item:hover .shelfVolume, .item:focus-visible .shelfVolume { transform: translateY(-10px) rotateX(2deg) rotateY(-8deg); }
 .item:hover .object::before { opacity: .4; }
 .face { position: absolute; background: var(--color); color: var(--foil); backface-visibility: hidden; -webkit-backface-visibility: hidden; }
@@ -84,11 +84,11 @@
 .savedLink strong { display: block; font-size: 16px; line-height: 1.5; font-weight: 400; margin-bottom: 5px; }
 .savedLink small { font-size: 12px; color: var(--fg-2); }
 .srOnly { position: absolute; clip-path: inset(50%); width: 1px; height: 1px; overflow: hidden; }
-@media(min-width:1350px) { .shelfVolume { --book-w: 148px; --book-h: 222px; }.object { height: 247px; } }
+@media(min-width:1350px) { .shelfVolume { --book-w: 148px; --book-h: calc(var(--book-w) * var(--cover-ratio, 1.5)); }.object { height: 247px; } }
 @media(max-width:1100px) {
   .layout { grid-template-columns: 110px minmax(0, 1fr); gap: 25px; }.collection { gap: 42px 27px; grid-template-columns: repeat(4, minmax(0, 1fr)); }
   .bookReader { gap: 23px; grid-template-columns: 220px minmax(0, 1fr); }.reader:not(.bookReader) { grid-template-columns: 175px minmax(0, 1fr); }
-  .document { padding-left: 25px; }.interactiveVolume { --book-w: 180px; --book-h: 270px; }.stage { height: 345px; }
+  .document { padding-left: 25px; }.interactiveVolume { --book-w: 180px; --book-h: calc(var(--book-w) * var(--cover-ratio, 1.5)); }.stage { height: 345px; }
 }
 @media(max-width:850px) {
   .collection { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 45px 24px; }.bookReader { display: block; }.preview { position: relative; top: auto; margin-bottom: 40px; }
@@ -96,10 +96,10 @@
 }
 @media(max-width:600px) {
   .header { margin-bottom: 0; }.layout { display: block; }.nav { position: static; flex-direction: row; gap: 27px; padding: 24px 0 29px; }.nav a { font-size: 15px; }
-  .collection { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 36px 24px; padding: 0 6px; }.shelfVolume { --book-w: 132px; --book-h: 198px; }.object { height: 219px; }.caption { font-size: 11px; }
+  .collection { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 36px 24px; padding: 0 6px; }.shelfVolume { --book-w: 132px; --book-h: calc(var(--book-w) * var(--cover-ratio, 1.5)); }.object { height: 219px; }.caption { font-size: 11px; }
   .reader:not(.bookReader) { display: block; min-height: 0; }.catalog { padding: 0; border: 0; }.reader:not(.selected) .document { display: none; }.selected:not(.bookReader) .catalog { display: none; }
   .document { padding: 0 0 40px; }.backList { display: block; font-size: 13px; color: var(--fg-2); padding-bottom: 24px; }.preview { margin-bottom: 33px; }.stage { height: 333px; }
-  .interactiveVolume { --book-w: 195px; --book-h: 292.5px; }.shadow { bottom: 0; }
+  .interactiveVolume { --book-w: 195px; --book-h: calc(var(--book-w) * var(--cover-ratio, 1.5)); }.shadow { bottom: 0; }
 }
 @media(prefers-reduced-motion:reduce) {
   .caption, .shelfVolume { transition: none; }.item:hover .shelfVolume, .item:focus-visible .shelfVolume { transform: rotateY(-25deg); }

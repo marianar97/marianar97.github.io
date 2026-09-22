@@ -2,6 +2,7 @@
 export interface Book {
  id: string; title: string; author: string; color: string; foil: string;
  lean: number; thought: string; motif: string; number: number;
+ cover?: { src: string; width: number; height: number; source: string; isbn: string };
 }
 export interface DocumentEntry {
  id: string; type: "book" | "note"; title: string; subtitle: string; html: string;
@@ -42,10 +43,17 @@ export const books: Book[] = [
   },
   {
     "id": "beginning-of-infinity",
+    "cover": {
+      "src": "/thinking-space/covers/beginning-of-infinity.jpg",
+      "width": 290,
+      "height": 450,
+      "source": "https://www.penguinrandomhouse.com/books/293575/the-beginning-of-infinity-by-david-deutsch/",
+      "isbn": "9780143121350"
+    },
     "title": "The Beginning of Infinity",
     "author": "David Deutsch",
-    "color": "#304956",
-    "foil": "#e8e0c4",
+    "color": "#111414",
+    "foil": "#eeeae2",
     "lean": 0.6,
     "thought": "A better question can open a much bigger door.",
     "motif": "<path d=\"M7 87h18V70h18V53h18V36h18V19h16M7 97h28V80h18V63h18V46h18V29h6\"/>",
