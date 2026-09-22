@@ -37,7 +37,7 @@ dialog{border:1px solid var(--line);padding:0;background:var(--panel);color:var(
 <main class="library-layout">
 <nav class="section-nav" aria-label="Reading room"><a href="#shelf" data-section="shelf">Bookshelf</a><a href="#notes" data-section="notes">Notes</a><a href="#links" data-section="links">Links</a></nav>
 <section id="shelf-page" aria-label="Bookshelf"><div class="collection" id="collection"></div></section>
-<section class="reader" id="reader" hidden aria-label="Notes reader"><aside class="book-preview" id="book-preview" hidden aria-label="Book preview"><div class="book-stage" id="book-stage"><div class="volume-shadow" aria-hidden="true"></div><div class="volume-tilt" id="volume-tilt"><div id="display-volume" class="display-volume" aria-hidden="true"></div></div></div><div class="preview-controls"><button id="motion-toggle" aria-pressed="false">Pause motion</button><button id="turn-volume" aria-pressed="false">Turn book ↻</button></div></aside><aside class="catalog"><div class="catalog-top"><h2 id="catalog-title">The notebook</h2></div><label for="search" class="small" style="position:absolute;clip-path:inset(50%);width:1px;height:1px;overflow:hidden">Search titles and topics</label><input class="search" id="search" type="search" placeholder="Find a note…" autocomplete="off"><nav id="catalog-list" aria-label="Documents"></nav><p class="empty-search" id="empty-search" hidden>No matching notes. Try a different title or topic.</p></aside><div class="document"><button class="back-list" id="back-list">← All notes</button><div class="document-status" id="document-status" role="status"></div><article class="markdown" id="markdown" aria-label="Selected document" tabindex="-1"></article></div></section>
+<section class="reader" id="reader" hidden aria-label="Notes reader"><aside class="book-preview" id="book-preview" hidden aria-label="Book preview"><div class="book-stage" id="book-stage" tabindex="0" role="group" aria-label="3D book. Drag to rotate, or use arrow keys. Press Home to reset."><div class="volume-shadow" aria-hidden="true"></div><div class="volume-tilt" id="volume-tilt"><div id="display-volume" class="display-volume" aria-hidden="true"></div></div></div></aside><aside class="catalog"><div class="catalog-top"><h2 id="catalog-title">The notebook</h2></div><label for="search" class="small" style="position:absolute;clip-path:inset(50%);width:1px;height:1px;overflow:hidden">Search titles and topics</label><input class="search" id="search" type="search" placeholder="Find a note…" autocomplete="off"><nav id="catalog-list" aria-label="Documents"></nav><p class="empty-search" id="empty-search" hidden>No matching notes. Try a different title or topic.</p></aside><div class="document"><button class="back-list" id="back-list">← All notes</button><div class="document-status" id="document-status" role="status"></div><article class="markdown" id="markdown" aria-label="Selected document" tabindex="-1"></article></div></section>
 <section class="links-page" id="links-page" aria-label="Saved links" hidden><div id="saved-links"></div></section></main>
 </div>
 <script>
@@ -88,22 +88,4 @@ links.forEach(l=>{const a=document.createElement('a');a.className='saved-link';a
 document.getElementById('search').addEventListener('input',renderCatalog);document.getElementById('back-list').addEventListener('click',()=>{location.hash=activeType==='book'?'books':'notes'});window.addEventListener('hashchange',route);
 
 
-const reducedMotion=matchMedia('(prefers-reduced-motion: reduce)');
-let motionPaused=false;
-const bookStage=document.getElementById('book-stage'),volumeTilt=document.getElementById('volume-tilt'),motionToggle=document.getElementById('motion-toggle'),turnVolume=document.getElementById('turn-volume');
-function syncBookMotion(){const paused=motionPaused||reducedMotion.matches;bookStage.classList.toggle('motion-paused',paused);motionToggle.textContent=reducedMotion.matches?'Motion reduced':motionPaused?'Resume motion':'Pause motion';motionToggle.setAttribute('aria-pressed',String(paused));motionToggle.disabled=reducedMotion.matches;if(reducedMotion.matches){volumeTilt.style.removeProperty('--tilt-x');volumeTilt.style.removeProperty('--tilt-y')}}
-function showBookPreview(selected){const show=selected?.type==='book';reader.classList.toggle('book-reading',!!show);document.getElementById('book-preview').hidden=!show;if(!show)return;
- const b=selected,i=books.findIndex(x=>x.id===b.id),volume=document.getElementById('display-volume');volume.style.setProperty('--color',b.color);volume.style.setProperty('--foil',b.foil);
- const motif=`<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.2">${motifs[b.motif]}</svg>`;
- volume.innerHTML=volumeFaces(b,i);
- bookStage.classList.remove('is-turned');volumeTilt.style.removeProperty('--tilt-x');volumeTilt.style.removeProperty('--tilt-y');turnVolume.textContent='Turn book ↻';turnVolume.setAttribute('aria-pressed','false');syncBookMotion();
-
-}
-motionToggle.addEventListener('click',()=>{motionPaused=!motionPaused;syncBookMotion()});
-turnVolume.addEventListener('click',()=>{const turned=bookStage.classList.toggle('is-turned');turnVolume.textContent=turned?'Show cover ↻':'Turn book ↻';turnVolume.setAttribute('aria-pressed',String(turned))});
-bookStage.addEventListener('pointermove',e=>{if(e.pointerType!=='mouse'||reducedMotion.matches||motionPaused)return;const bounds=bookStage.getBoundingClientRect();volumeTilt.style.setProperty('--tilt-x',`${((e.clientY-bounds.top)/bounds.height-.5)*-9}deg`);volumeTilt.style.setProperty('--tilt-y',`${((e.clientX-bounds.left)/bounds.width-.5)*18}deg`)});
-bookStage.addEventListener('pointerleave',()=>{volumeTilt.style.removeProperty('--tilt-x');volumeTilt.style.removeProperty('--tilt-y')});
-reducedMotion.addEventListener('change',syncBookMotion);
-
-route();
-</script></body></html>
+</script><script src="book-motion.js"></script></body></html>

@@ -65,3 +65,13 @@ header{height:auto;padding:80px 0 32px;border:0;justify-content:flex-start}
 @media(prefers-reduced-motion:reduce){.collection .caption{transition:none}}
 
 .saved-link:first-child{padding-top:5px}
+
+/* Direct manipulation stays on the book; the surrounding page still scrolls. */
+.book-stage .display-volume{animation:none;transition:none;cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none}
+.book-stage .volume-tilt{transform:none;transition:none}
+.book-stage .cover-art{-webkit-user-drag:none}
+.book-stage.is-dragging,.book-stage.is-dragging *{cursor:grabbing!important}
+.book-stage:focus{outline:none}
+.book-stage:focus-visible{outline:1px solid #aaa;outline-offset:5px;border-radius:3px}
+
+.book-stage.is-pointer-focused:focus-visible{outline:none}
