@@ -1,36 +1,63 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# marianar.tech
 
-## Getting Started
+Personal website for Mariana Ramirez Duque. Two pages: a home page with bio
+and portrait, and `/links`.
 
-First, run the development server:
+## Stack
+
+- **Next.js 16** (App Router) with `output: "export"` — the whole site is
+  prerendered to static HTML at build time; there is no server at runtime.
+- **Tailwind CSS v4** for layout and spacing, plus hand-written CSS in
+  `app/globals.css` for color tokens, hover states, and the two-column grid.
+- **TypeScript**, strict mode.
+
+## Develop
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev     # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Build
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run build   # static export to out/
+npm run lint    # eslint (not run in CI)
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+To preview the exported site exactly as it deploys:
 
-## Learn More
+```bash
+npm run build && (cd out && python3 -m http.server 3000)
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Structure
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+app/
+  layout.tsx            root layout: font, metadata, the .site-shell <main>
+  globals.css           color tokens, base type, hover states, grid, motion
+  page.tsx              "/"      home — copy column + portrait
+  links/page.tsx        "/links" date/title rows
+  portrait.tsx          client — video/poster swap, tooltip, hover playback
+  use-portrait-audio.ts client — hidden Spotify iframe controller
+lib/content.ts          all site copy: bio, socials, links
+brand/                  master icon artwork (not deployed)
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+All copy lives in `lib/content.ts` — the page components hold only structure.
 
-## Deploy on Vercel
+Both routes share the one `<main>` in `layout.tsx`. The home page widens itself
+to a two-column layout purely by rendering `.home-layout`, which a `:has()`
+selector in `globals.css` matches; `/links` renders no such element and keeps
+the narrow reading column. There is no per-route layout file.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Note that `html { font-size: 18px }` rescales every rem-based Tailwind spacing
+utility by 12.5% — `px-6` renders at 27px, not 24px. Font sizes are stated
+literally in JSX (`text-[18px]`) and are unaffected.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Deploy
+
+Pushing to `main` triggers `.github/workflows/deploy.yml`, which builds and
+publishes `out/` to GitHub Pages. The custom domain comes from `CNAME` at the
+repo root, copied into `out/` by the workflow. CI does not run lint or tests.
