@@ -153,7 +153,6 @@ export default function Portrait() {
           onError={() => setUnavailable(true)}
         >
           <source src="/images/medellin-portrait.mp4" type="video/mp4" />
-          <a href="/images/medellin-portrait.gif">View the Medellín portrait</a>
         </video>
       )}
       <a
