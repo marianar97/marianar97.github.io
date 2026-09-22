@@ -3,6 +3,8 @@
 import Image from "next/image";
 import { useEffect, useId, useLayoutEffect, useRef, useState, useSyncExternalStore } from "react";
 import { createPortal } from "react-dom";
+import { FaSpotify } from "react-icons/fa";
+import { site } from "@/lib/content";
 import { SPOTIFY_IFRAME_API_URL, usePortraitAudio } from "./use-portrait-audio";
 
 const description = "Illustrated Medellín skyline surrounded by green hills, tropical leaves, and white flowers.";
@@ -154,6 +156,18 @@ export default function Portrait() {
           <a href="/images/medellin-portrait.gif">View the Medellín portrait</a>
         </video>
       )}
+      <a
+        className="portrait-spotify-link social-icon"
+        href={site.spotifyPlaylistUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Open Spotify playlist (opens in a new tab)"
+        title="Listen on Spotify"
+        onPointerEnter={hideTooltip}
+        onFocus={hideTooltip}
+      >
+        <FaSpotify size={20} aria-hidden="true" />
+      </a>
       {animationEnabled && !unavailable && (
         <div ref={musicHostRef} className="portrait-audio" aria-hidden="true" inert />
       )}

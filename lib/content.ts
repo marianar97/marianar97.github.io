@@ -17,6 +17,7 @@ export const site = {
   name: "Mariana Ramirez Duque",
   description: "Founding engineer at Fulcrum.",
   emailText: "mariana.ramirezd97 [at] gmail [dot] com",
+  spotifyPlaylistUrl: "https://open.spotify.com/playlist/1C71rB32iP5hL6anUEoi3D",
   socials: [
     { label: "GitHub", href: "https://github.com/marianar97" },
     { label: "LinkedIn", href: "https://www.linkedin.com/in/marianaramirezd/" },

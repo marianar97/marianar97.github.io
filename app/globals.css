@@ -135,6 +135,15 @@ img.portrait-media { cursor: default; }
 
 .portrait-media:focus-visible { outline: 2px solid var(--fg); outline-offset: 3px; }
 
+.portrait-spotify-link {
+  display: flex;
+  width: fit-content;
+  margin-top: 0px;
+  margin-left: auto;
+  /* The 544px-wide portrait includes a 24px white border in the asset. */
+  margin-right: calc(100% * 24 / 544);
+}
+
 .portrait-audio {
   position: absolute;
   width: 1px;

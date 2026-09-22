@@ -19,6 +19,7 @@ export const SPOTIFY_IFRAME_API_URL = "https://open.spotify.com/embed/iframe-api
 type PlaybackEvent = { data: { isPaused: boolean; isBuffering: boolean } };
 
 interface SpotifyController {
+  loadUri(uri: string): void;
   resume(): void;
   pause(): void;
   destroy(): void;
@@ -29,7 +30,7 @@ interface SpotifyController {
 interface SpotifyApi {
   createController(
     element: HTMLElement,
-    options: { uri: string; width: number; height: number },
+    options: { width: number; height: number },
     callback: (controller: SpotifyController) => void,
   ): void;
 }
@@ -82,7 +83,6 @@ export function usePortraitAudio(enabled: boolean) {
       const mount = document.createElement("div");
       host.appendChild(mount);
       api.createController(mount, {
-        uri: song_uri,
         width: 352,
         height: 152,
       }, (createdController) => {
@@ -94,6 +94,9 @@ export function usePortraitAudio(enabled: boolean) {
         controllerRef.current = controller;
         const iframe = host.querySelector("iframe");
         if (iframe) {
+          // Spotify defaults to lazy loading, but this player is visually clipped.
+          // Load it now so its ready event can fire before the first hover.
+          iframe.loading = "eager";
           iframe.tabIndex = -1;
           iframe.title = "Portrait music on Spotify";
         }
@@ -114,6 +117,8 @@ export function usePortraitAudio(enabled: boolean) {
           playingRef.current = isPlaying;
           setPlaying(isPlaying);
         });
+        // Set eager loading and attach listeners before navigating the iframe.
+        createdController.loadUri(song_uri);
       });
     }).catch(() => {
       if (!disposed) setUnavailable(true);

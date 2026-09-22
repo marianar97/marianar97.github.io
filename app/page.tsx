@@ -43,7 +43,7 @@ export default function Home() {
                     aria-label={label}
                     className="social-icon"
                   >
-                    <Icon size={20} />
+                    <Icon size={20} aria-hidden="true" />
                   </a>
                 );
               })}
