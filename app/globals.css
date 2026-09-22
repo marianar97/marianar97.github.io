@@ -135,18 +135,6 @@ img.portrait-media { cursor: default; }
 
 .portrait-media:focus-visible { outline: 2px solid var(--fg); outline-offset: 3px; }
 
-.portrait-spotify-link {
-  position: relative;
-  display: grid;
-  place-items: center;
-  width: 24px;
-  height: 24px;
-  /* Align beneath the artwork, accounting for the video's white border. */
-  margin: -12px 5% 0 auto;
-}
-
-.portrait-spotify-link:focus-visible { outline: 2px solid var(--fg); outline-offset: 3px; }
-
 .portrait-audio {
   position: absolute;
   width: 1px;

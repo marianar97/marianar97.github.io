@@ -3,9 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 
 // Change only this URL when choosing a song; Spotify share links work too.
-//const song_url = "https://open.spotify.com/track/3sK8wGT43QFpWrvNQsrQya?si=d4ce417a98d2408a"
-const song_url = 'https://open.spotify.com/track/4w6Wpq1KWk485krowaqUIV'
-
+const song_url = "https://open.spotify.com/track/3sK8wGT43QFpWrvNQsrQya";
 
 export function getSpotifyTrackUri(url: string): string | null {
   const trackId = url.trim().match(
@@ -14,8 +12,7 @@ export function getSpotifyTrackUri(url: string): string | null {
   return trackId ? `spotify:track:${trackId}` : null;
 }
 
-const song_uri = 'spotify:track:3sK8wGT43QFpWrvNQsrQya'
-// const song_uri = getSpotifyTrackUri(song_url)
+const song_uri = getSpotifyTrackUri(song_url);
 
 export const SPOTIFY_IFRAME_API_URL = "https://open.spotify.com/embed/iframe-api/v1";
 
