@@ -126,6 +126,11 @@ a.bio-link:hover {
 }
 
 .home-copy { min-width: 0; }
+.site-shell:has(.thinking-space) {
+  width: 100%;
+  max-width: 1600px;
+  padding-inline: clamp(24px, 5vw, 72px);
+}
 .home-copy > div:first-child > div:first-child { flex-wrap: wrap; gap: 16px; }
 .home-copy > div:first-child > p { overflow-wrap: anywhere; }
 .home-portrait { position: relative; width: 100%; margin: 0; }
