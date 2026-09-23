@@ -1,6 +1,8 @@
 # Thinking Space content
 
-Each book has a Markdown file in `content/thinking-space/`. Put YAML properties between `---` lines at the very start:
+Writing lives in three folders under `content/thinking-space/`. The folder is the type: `books/`, `notes/`, and `links/`. The filename is the id, so `notes/mental-models.md` opens at `#note/mental-models`.
+
+Each book has a Markdown file in `content/thinking-space/books/`. Put YAML properties between `---` lines at the very start:
 
 ```yaml
 ---
@@ -25,6 +27,20 @@ Write paragraphs, headings, quotes, and lists below the closing `---`. On book p
 
 Properties display publicly: only include information you want on the website. The page is a reader; edit the Markdown file to change a property. Cover artwork and shelf metadata remain in `lib/thinking-space.ts`.
 
-General notes still work without YAML. Adding YAML to a general note displays its properties above its Markdown content.
+A note is a Markdown file in `content/thinking-space/notes/`. `title` and `subtitle` in its YAML become the sidebar label. Other YAML properties display above the writing. Notes are listed alphabetically by title.
+
+A link is a Markdown file in `content/thinking-space/links/` with `title`, `date`, and `href`. The same files fill the Thinking Space links section and the homepage Links page. Links are listed alphabetically by title.
 
 Parser checks: `node --experimental-strip-types --test tests/thinking-space-frontmatter.test.mjs`
+
+## Adjusting the design
+
+In `app/thinking-space/thinking-space.tsx`, edit the setting near the top:
+
+```tsx
+const ANNOTATION_WIDTH = 'max-w-[780px]';
+```
+
+Change `780` to your preferred width, or use `max-w-none` to fill the available space. Keep the whole Tailwind class as a literal string. Save to preview locally; rebuild to publish.
+
+Layout, spacing, and navigation use Tailwind in `thinking-space.tsx`. Reading typography lives in `markdown-content.tsx`, and YAML property presentation in `document-properties.tsx`. The only CSS module, `book.module.css`, is for the 3D book geometry, materials, and effects.

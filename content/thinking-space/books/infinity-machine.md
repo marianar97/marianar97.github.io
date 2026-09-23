@@ -7,6 +7,12 @@ genres:
   - Nonfiction
   - Artificial Intelligence
   - Business
+famous-figures:
+  - Demis Hassabis
+  - Geoffrey Hinton
+  - Elon Musk
+  - Sam Altman
+  - Mark Zuckerburg
 ---
 
 This book goes over the life of Demis Hassabis, the genius behind DeepMind. From his upbringing as a poor londoner to his studies at Cambridge, the founding of DeepMind to going to Silicon Valley and meeting with prominent figures such as Elon Musk and Mark Zukerkerberg, and getting aquired by Google.
@@ -26,14 +32,20 @@ How a complex entity has property and behaviors that their components don't on t
 > “Let’s say you have a family of amino acid sequences,” Jumper explained. “You mask certain amino acids in the sequences and you ask the network to guess what’s been hidden. If the network learns to do that well, it will also learn a lot of other things along the way—evolution, physics, geometry. It will understand deep truths about proteins. It might even predict protein structure.” Jumper sounded like Ilya Sutskever. A neural network might complete a narrow task, like guessing a concealed token. But something broader would emerge: intelligence."
 
 
+### Symbolic Logic
+In the 1950s, scientists thought machines could be intelligent by following [symbolic logic](https://en.wikipedia.org/wiki/Logic). This led to the development of symbolic artificial intelligence.
 
-“What I cannot build, I do not understand,” Feynman famously remarked, and Hassabis clicked on a controller in his hand to display a slide of the great physicist. Following Feynman’s dictum, in order to grasp human intelligence, scientists would have to build an artificial analog: a machine that mimicked human thinking. AI’s practical or profit-making potential was a secondary concern. The youthful figure on the stage wanted “to understand our own minds better.” "
+> Programmers chose symbols to represent concepts from the real world: digits, words, physical objects. They supplied the computer with information about these symbols, then added instructions on logical rules—the definitions of “and,” “or,” “not and,” and so on. If the computer was told that the first symbol was green and the second one was blue, it could accurately deduce that they were not both the same color. If it was told that humans are mortal, and that Socrates was human, then it could deduce that Socrates was mortal. The idea was to transform all real-world phenomena into quasi-mathematical syllogisms. If a is b, and c is a, then c is b, also.
 
-"I had long been fascinated by the predicament of scientists in society. In one sense, scientists are just seekers of truth, a seemingly uncontroversial mission. In another sense, they are the destroyers of all things: our jobs, our ways of thinking, potentially even our existence."
+> The essence of intelligence is the ability to respond flexibly to complex situations. But symbolic programming involves feeding inflexible rules into inflexible machines; inflexibility piled on inflexibility would never conjure flexible intelligence. To rise above this contradiction, future scientists would have to invent a new kind of machine: a machine that discovered the patterns in a near infinity of data.
+
+### Deep Learning and Reenforcement Learning
 
 
-#### Business
+### Enterpeneurship 
 
+
+### Induction vs Deduction
 
 
 

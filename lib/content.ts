@@ -7,12 +7,6 @@ export interface Social {
   href: string;
 }
 
-export interface LinkItem {
-  title: string;
-  date: string;
-  href: string;
-}
-
 export const site = {
   name: "Mariana Ramirez Duque",
   description: "Founding engineer at Fulcrum.",
@@ -44,17 +38,4 @@ export const bio: BioSegment[][] = [
   [
     "Originally from Medellín, Colombia, where I wrote my first program at 13 with Lego Mindstorms after watching The Social Network. Outside of work, you'll find me going down rabbit holes in history and philosophy.",
   ],
-];
-
-export const links: LinkItem[] = [
-  {
-    title: "Lil'Log (Lilian Weng) tech blog",
-    date: "Aug 2026",
-    href: "https://lilianweng.github.io/",
-  },
-  {
-    title: "Ordinary Abundance",
-    date: "Aug 2026",
-    href: "https://ordinaryabundance.com/",
-  },
 ];

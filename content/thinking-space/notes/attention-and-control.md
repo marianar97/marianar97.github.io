@@ -1,3 +1,8 @@
+---
+title: Attention & control
+subtitle: Philosophy in practice
+---
+
 # Attention & control
 
 Philosophy in practice · Sample note

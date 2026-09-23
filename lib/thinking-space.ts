@@ -1,4 +1,4 @@
-// Books and notes displayed in Thinking Space.
+// Shelf visuals for Thinking Space books. Writing lives in content/thinking-space/.
 export interface Book {
  id: string; title: string; author: string; color: string; foil: string;
  lean: number; thought: string; motif: string; number: number;
@@ -10,6 +10,7 @@ export interface DocumentEntry {
 }
 export type PropertyScalar = string | number | boolean;
 export interface DocumentProperty { name: string; value: PropertyScalar | PropertyScalar[] }
+export interface LinkItem { title: string; date: string; href: string }
 export const books: Book[] = [
   {
     "id": "beginning-of-infinity",
@@ -46,22 +47,5 @@ export const books: Book[] = [
     "thought": "Demis Hassabis, DeepMind, and the Quest for Superintelligence",
     "motif": "<path d=\"M50 50C35 22 10 22 10 50s25 28 40 0 40-28 40 0-25 28-40 0Z\"/>",
     "number": 2
-  }
-];
-export const notes = [
-  {
-    "id": "mental-models",
-    "title": "Mental models",
-    "subtitle": "Thinking clearly"
-  },
-  {
-    "id": "attention-and-control",
-    "title": "Attention & control",
-    "subtitle": "Philosophy in practice"
-  },
-  {
-    "id": "learning-in-public",
-    "title": "Learning in public",
-    "subtitle": "Learning & making"
   }
 ];

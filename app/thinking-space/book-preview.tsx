@@ -3,7 +3,7 @@
 import { useEffect, useRef } from 'react';
 import type { Book as BookData } from '@/lib/thinking-space';
 import Book, { bookStyle } from './book';
-import styles from './thinking-space.module.css';
+import styles from './book.module.css';
 
 type Pose = { x: number; y: number };
 type Drag = { id: number; startX: number; startY: number; pose: Pose; lastX: number; lastY: number; lastTime: number };
@@ -108,8 +108,8 @@ export default function BookPreview({ book }: { book: BookData }) {
     };
   }, []);
 
-  return <aside className={styles.preview} aria-label="Book preview">
-    <div ref={stageRef} className={styles.stage} tabIndex={0} role="group" aria-label="3D book. Drag to rotate, or use arrow keys. Press Home to reset.">
+  return <aside className="min-w-0" aria-label="Book preview">
+    <div ref={stageRef} className={`${styles.stage} relative flex h-[390px] items-center justify-center focus:outline-none max-[1100px]:h-[345px] max-[850px]:h-[330px] max-[600px]:h-[333px]`} tabIndex={0} role="group" aria-label="3D book. Drag to rotate, or use arrow keys. Press Home to reset.">
       <div className={styles.shadow} aria-hidden="true" />
       <div ref={volumeRef} className={`${styles.volume} ${styles.interactiveVolume}`} style={bookStyle(book)} aria-hidden="true"><Book book={book} /></div>
     </div>

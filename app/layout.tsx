@@ -31,7 +31,7 @@ export default function RootLayout({
     <html lang="en" className={inter.variable}>
       <body>
         <div className="min-h-screen">
-          <main className="site-shell w-[80%] sm:w-[75%] md:w-[62%] lg:w-[50%] xl:w-[44%] 2xl:w-[36%] max-w-[560px] mx-auto px-6 pt-16 sm:pt-20 pb-20">
+          <main className="site-shell w-[80%] sm:w-[75%] md:w-[62%] lg:w-[50%] xl:w-[44%] 2xl:w-[36%] max-w-[560px] mx-auto px-6 pt-16 sm:pt-20 pb-20 has-[.thinking-space]:w-full has-[.thinking-space]:max-w-[1600px] has-[.thinking-space]:px-[clamp(24px,5vw,72px)]">
             {children}
           </main>
         </div>

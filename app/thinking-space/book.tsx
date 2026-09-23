@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import type { CSSProperties } from 'react';
 import type { Book as BookData } from '@/lib/thinking-space';
-import styles from './thinking-space.module.css';
+import styles from './book.module.css';
 
 export function bookStyle(book: BookData): CSSProperties {
   return {

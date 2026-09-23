@@ -1,3 +1,8 @@
+---
+title: Mental models
+subtitle: Thinking clearly
+---
+
 # Mental models
 
 Thinking clearly · Sample note

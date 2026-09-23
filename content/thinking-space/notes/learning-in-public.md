@@ -1,3 +1,8 @@
+---
+title: Learning in public
+subtitle: Learning & making
+---
+
 # Learning in public
 
 Learning & making · Sample note
