@@ -72,12 +72,6 @@ export default function Home() {
               ↗
             </span>
           </Link>
-          <Link href="/links" className="nav-link text-[16px]">
-            links I like
-            <span className="ml-1 text-[13px]" aria-hidden>
-              ↗
-            </span>
-          </Link>
         </nav>
       </div>
       <Portrait />
