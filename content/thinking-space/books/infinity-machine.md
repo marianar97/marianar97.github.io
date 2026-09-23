@@ -15,9 +15,9 @@ famous-figures:
   - Mark Zuckerburg
 ---
 
-This book goes over the life of Demis Hassabis, the genius behind DeepMind. From his upbringing as a poor londoner to his studies at Cambridge, the founding of DeepMind to going to Silicon Valley and meeting with prominent figures such as Elon Musk and Mark Zukerkerberg, and getting aquired by Google.
+This book follows the life of Demis Hassabis, the founder of DeepMind, from his upbringing in London and studies at Cambridge to the founding of DeepMind, his move into Silicon Valley, meetings with prominent figures such as Elon Musk and Mark Zuckerberg, and the company’s eventual acquisition by Google.
 
-It also touches on how AI has advanced through the years, from a classic ML approach of 
+It also traces the evolution of artificial intelligence over the years, from early symbolic and classical machine-learning approaches to deep learning, reinforcement learning, and modern neural networks.
 
 ## **Concepts**
 
