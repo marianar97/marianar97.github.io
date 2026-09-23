@@ -6,7 +6,10 @@ export interface Book {
 }
 export interface DocumentEntry {
  id: string; type: "book" | "note"; title: string; subtitle: string; html: string;
+ properties: DocumentProperty[];
 }
+export type PropertyScalar = string | number | boolean;
+export interface DocumentProperty { name: string; value: PropertyScalar | PropertyScalar[] }
 export const books: Book[] = [
   {
     "id": "beginning-of-infinity",

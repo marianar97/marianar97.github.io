@@ -18,7 +18,7 @@ Before a difficult conversation, write down the part that is mine: preparation, 
 
 ## References & connections
 
-- [Meditations](#book/meditations) — Related book · Marcus Aurelius
+- *Meditations* — Related book · Marcus Aurelius
 - [Mental models](#note/mental-models) — Connected note · Mental models
 
 These are illustrative connections for the prototype, not quotations or verified citations.

@@ -1,6 +1,9 @@
-# The Beginning of Infinity
-
-David Deutsch · Philosophy · Sample reading note
+---
+title: The Beginning of Infinity
+author: David Deutsch
+genres:
+  - Philosophy
+---
 
 ## In the margins
 

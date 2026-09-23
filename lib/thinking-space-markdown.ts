@@ -22,7 +22,7 @@ export function renderMarkdown(source: string) {
     if (list) { out.push(`</${list}>`); list = null; }
   };
   for (const line of source.split('\n')) {
-    const heading = line.match(/^(#{1,3}) (.+)$/);
+    const heading = line.match(/^(#{1,6}) (.+)$/);
     const item = line.match(/^(- |\d+\. )(.+)$/);
     if (!line.trim()) flush();
     else if (heading) { flush(); out.push(`<h${heading[1].length}>${inline(heading[2])}</h${heading[1].length}>`); }
