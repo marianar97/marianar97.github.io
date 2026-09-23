@@ -6,6 +6,7 @@ import { createPortal } from "react-dom";
 import { FaSpotify } from "react-icons/fa";
 import { site } from "@/lib/content";
 import { SPOTIFY_IFRAME_API_URL, usePortraitAudio } from "./use-portrait-audio";
+import PortraitPlayer from "./portrait-player";
 
 const description = "Illustrated Medellín skyline surrounded by green hills, tropical leaves, and white flowers.";
 
@@ -31,6 +32,7 @@ export default function Portrait() {
   const tooltipId = useId();
   const tooltipRef = useRef<HTMLSpanElement>(null);
   const [anchor, setAnchor] = useState({ x: 0, y: 0 });
+  const playerControlsUsed = useRef(false);
 
   useLayoutEffect(() => {
     const tooltip = tooltipRef.current;
@@ -74,10 +76,19 @@ export default function Portrait() {
   const {
     hostRef: musicHostRef,
     playing: musicPlaying,
+    ready: musicReady,
+    starting: musicStarting,
+    stalled: musicStalled,
     unavailable: musicUnavailable,
+    position: musicPosition,
+    duration: musicDuration,
+    track: musicTrack,
+    canSkip: canSkipMusic,
     start: startMusic,
     pause: pauseMusic,
     toggle: toggleMusic,
+    previous: previousMusic,
+    next: nextMusic,
   } = usePortraitAudio(animationEnabled && !unavailable);
 
   function play(video: HTMLVideoElement) {
@@ -99,17 +110,24 @@ export default function Portrait() {
         }
       }}
       onPointerLeave={hideTooltip}
+      onMouseLeave={() => {
+        if (!playerControlsUsed.current) pauseMusic();
+      }}
       onFocus={(event) => {
         if (!event.target.classList.contains("portrait-media")) return;
         const bounds = event.target.getBoundingClientRect();
         setAnchor({ x: bounds.left + bounds.width / 2, y: bounds.top });
         showTooltip();
       }}
-      onBlur={hideTooltip}
+      onBlur={(event) => {
+        hideTooltip();
+        if (!event.currentTarget.contains(event.relatedTarget) && !playerControlsUsed.current) pauseMusic();
+      }}
       onKeyDown={(event) => { if (event.key === "Escape") hideTooltip(); }}
     >
       {/* React puts this in the initial document head, before hydration starts. */}
       <link rel="preload" as="script" href={SPOTIFY_IFRAME_API_URL} media={animationQuery} />
+      <div className="portrait-artwork">
       {unavailable || !animationEnabled ? (
         <Image src="/images/medellin-poster-video.png" alt={description} aria-describedby={tooltipVisible ? tooltipId : undefined} width={544} height={720} unoptimized className="portrait-media" />
       ) : (
@@ -129,19 +147,17 @@ export default function Portrait() {
           tabIndex={0}
           onMouseEnter={(event) => {
             play(event.currentTarget);
-            startMusic();
+            if (!playerControlsUsed.current) startMusic();
           }}
           onMouseLeave={(event) => {
             event.currentTarget.pause();
-            pauseMusic();
           }}
           onFocus={(event) => {
             play(event.currentTarget);
-            if (event.currentTarget.matches(":focus-visible")) startMusic();
+            if (!playerControlsUsed.current && event.currentTarget.matches(":focus-visible")) startMusic();
           }}
           onBlur={(event) => {
             event.currentTarget.pause();
-            pauseMusic();
           }}
           onClick={toggleMusic}
           onKeyDown={(event) => {
@@ -155,6 +171,34 @@ export default function Portrait() {
           <source src="/images/medellin-portrait.mp4" type="video/mp4" />
         </video>
       )}
+      {animationEnabled && !unavailable && (
+        <div className="portrait-player-overlay" onPointerEnter={hideTooltip} onFocus={hideTooltip}>
+          <PortraitPlayer
+            ready={musicReady}
+            playing={musicPlaying}
+            starting={musicStarting}
+            stalled={musicStalled}
+            unavailable={musicUnavailable}
+            position={musicPosition}
+            duration={musicDuration}
+            track={musicTrack}
+            canSkip={canSkipMusic}
+            onToggle={() => {
+              playerControlsUsed.current = true;
+              toggleMusic();
+            }}
+            onPrevious={() => {
+              playerControlsUsed.current = true;
+              previousMusic();
+            }}
+            onNext={() => {
+              playerControlsUsed.current = true;
+              nextMusic();
+            }}
+          />
+        </div>
+      )}
+      </div>
       <a
         className="portrait-spotify-link social-icon"
         href={site.spotifyPlaylistUrl}
