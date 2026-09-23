@@ -65,7 +65,13 @@ export default function Home() {
             </p>
           ))}
         </div>
-        <nav className="anim d3">
+        <nav className="anim d3 flex flex-wrap items-center gap-x-6 gap-y-3">
+          <Link href="/thinking-space" className="nav-link text-[16px]">
+            thinking space
+            <span className="ml-1 text-[13px]" aria-hidden>
+              ↗
+            </span>
+          </Link>
           <Link href="/links" className="nav-link text-[16px]">
             links I like
             <span className="ml-1 text-[13px]" aria-hidden>

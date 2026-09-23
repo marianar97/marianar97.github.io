@@ -1,6 +1,7 @@
-import { links } from "@/lib/content";
+import { loadThinkingSpaceContent } from "@/lib/thinking-space-content";
 
-export default function Links() {
+export default async function Links() {
+  const { links } = await loadThinkingSpaceContent();
   return (
     <>
       <h1 className="anim d1 text-[24px] font-semibold tracking-[-0.02em] leading-none mb-10">
