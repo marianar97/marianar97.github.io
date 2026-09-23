@@ -123,7 +123,28 @@ a.bio-link:hover {
 .home-copy > div:first-child > div:first-child { flex-wrap: wrap; gap: 16px; }
 .home-copy > div:first-child > p { overflow-wrap: anywhere; }
 .home-portrait { position: relative; width: 100%; margin: 0; }
+.portrait-artwork { position: relative; }
 .portrait-media { display: block; width: 100%; height: auto; border-radius: 6px; cursor: pointer; }
+
+.portrait-player-overlay {
+  position: absolute;
+  left: 50%;
+  bottom: 7%;
+  width: min(320px, 84%);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translate(-50%, 6px);
+  transition: opacity .18s ease, transform .18s ease, visibility .18s;
+}
+
+.portrait-artwork:hover .portrait-player-overlay,
+.portrait-artwork:has(:focus-visible) .portrait-player-overlay {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translate(-50%, 0);
+}
 
 img.portrait-media { cursor: default; }
 
@@ -162,6 +183,7 @@ img.portrait-media { cursor: default; }
 
 @media (prefers-reduced-motion: reduce) {
   .home-layout .anim { animation: none; }
+  .portrait-player-overlay { transition: none; transform: translateX(-50%); }
 }
 
 /* Portaled to the body so the portrait's entrance transform cannot offset it. */

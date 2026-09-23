@@ -1,0 +1,62 @@
+{
+  "url": "https://open.spotify.com/playlist/1C71rB32iP5hL6anUEoi3D",
+  "uri": "spotify:playlist:1C71rB32iP5hL6anUEoi3D",
+  "title": "DtMF",
+  "owner": "Mariana Ramirez",
+  "tracks": [
+    {
+      "uri": "spotify:track:3sK8wGT43QFpWrvNQsrQya",
+      "title": "DtMF",
+      "artist": "Bad Bunny",
+      "duration": 237117
+    },
+    {
+      "uri": "spotify:track:4w6Wpq1KWk485krowaqUIV",
+      "title": "Viajando Por El Mundo",
+      "artist": "KAROL G, Manu Chao",
+      "duration": 268075
+    },
+    {
+      "uri": "spotify:track:4tXR895KKljrC2VptgyEhJ",
+      "title": "La Gota Fria",
+      "artist": "Carlos Vives",
+      "duration": 215493
+    },
+    {
+      "uri": "spotify:track:4qAknKWl2aMvWn4r1nzWAa",
+      "title": "Vivir Lo Nuestro",
+      "artist": "LA INDIA, Marc Anthony",
+      "duration": 367026
+    },
+    {
+      "uri": "spotify:track:6QJ1F9DrlsRSmKDcdVS0Oy",
+      "title": "Lloraras",
+      "artist": "Oscar D'León, La Dimensión Latina",
+      "duration": 222200
+    },
+    {
+      "uri": "spotify:track:4UAjqa7Y29d5EZYGalCOop",
+      "title": "El Camino de la Vida",
+      "artist": "El Trío América",
+      "duration": 211999
+    },
+    {
+      "uri": "spotify:track:6M8horg7h52MPTxY0I3dQJ",
+      "title": "La Bilirrubina",
+      "artist": "Juan Luis Guerra 4.40",
+      "duration": 245120
+    },
+    {
+      "uri": "spotify:track:5fSDXbY8o9pA3TKwAbfwML",
+      "title": "Mi Primer Millon",
+      "artist": "Bacilos",
+      "duration": 237386
+    },
+    {
+      "uri": "spotify:track:6YYmoV9YbBefsspGmqFHbs",
+      "title": "Una Vaina Loca",
+      "artist": "Fuego",
+      "duration": 188894
+    }
+  ]
+}
