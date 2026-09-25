@@ -1,0 +1,226 @@
+"use client";
+
+import Image from "next/image";
+import { useEffect, useId, useLayoutEffect, useRef, useState, useSyncExternalStore } from "react";
+import { createPortal } from "react-dom";
+import { FaSpotify } from "react-icons/fa";
+import { site } from "@/lib/content";
+import { SPOTIFY_IFRAME_API_URL, usePortraitAudio } from "./use-portrait-audio";
+import PortraitPlayer from "./portrait-player";
+
+const description = "Illustrated Medellín skyline surrounded by green hills, tropical leaves, and white flowers.";
+
+const animationQuery = "(min-width: 768px)";
+
+function subscribeToViewport(onChange: () => void) {
+  const viewport = window.matchMedia(animationQuery);
+  viewport.addEventListener("change", onChange);
+  return () => viewport.removeEventListener("change", onChange);
+}
+
+function getAnimationEnabled() {
+  return window.matchMedia(animationQuery).matches;
+}
+
+function getServerAnimationEnabled() {
+  return false;
+}
+
+export default function Portrait() {
+  const [unavailable, setUnavailable] = useState(false);
+  const [tooltipVisible, setTooltipVisible] = useState(false);
+  const tooltipId = useId();
+  const tooltipRef = useRef<HTMLSpanElement>(null);
+  const [anchor, setAnchor] = useState({ x: 0, y: 0 });
+  const playerControlsUsed = useRef(false);
+
+  useLayoutEffect(() => {
+    const tooltip = tooltipRef.current;
+    if (!tooltipVisible || !tooltip) return;
+    const { width, height } = tooltip.getBoundingClientRect();
+    const margin = 8;
+    const offset = 12;
+    const left = Math.max(margin, Math.min(anchor.x - width / 2, window.innerWidth - width - margin));
+    const above = anchor.y - height - offset >= margin;
+    const top = above ? anchor.y - height - offset : anchor.y + offset;
+    tooltip.style.left = `${left}px`;
+    tooltip.style.top = `${Math.max(margin, Math.min(top, window.innerHeight - height - margin))}px`;
+    tooltip.style.visibility = "visible";
+  }, [anchor, tooltipVisible]);
+  const tooltipTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => () => {
+    if (tooltipTimer.current !== null) clearTimeout(tooltipTimer.current);
+  }, []);
+
+  function showTooltip() {
+    if (tooltipTimer.current !== null) clearTimeout(tooltipTimer.current);
+    setTooltipVisible(true);
+    tooltipTimer.current = setTimeout(() => {
+      setTooltipVisible(false);
+      tooltipTimer.current = null;
+    }, 2000);
+  }
+
+  function hideTooltip() {
+    if (tooltipTimer.current !== null) clearTimeout(tooltipTimer.current);
+    tooltipTimer.current = null;
+    setTooltipVisible(false);
+  }
+
+  const animationEnabled = useSyncExternalStore(
+    subscribeToViewport,
+    getAnimationEnabled,
+    getServerAnimationEnabled,
+  );
+  const {
+    hostRef: musicHostRef,
+    playing: musicPlaying,
+    ready: musicReady,
+    starting: musicStarting,
+    stalled: musicStalled,
+    unavailable: musicUnavailable,
+    position: musicPosition,
+    duration: musicDuration,
+    track: musicTrack,
+    canSkip: canSkipMusic,
+    start: startMusic,
+    pause: pauseMusic,
+    toggle: toggleMusic,
+    previous: previousMusic,
+    next: nextMusic,
+  } = usePortraitAudio(animationEnabled && !unavailable);
+
+  function play(video: HTMLVideoElement) {
+    // Leaving before playback starts can abort play(); keep the portrait visible.
+    void video.play().catch(() => {});
+  }
+
+  return (
+    <figure
+      className="home-portrait anim d2"
+      onPointerEnter={(event) => {
+        if (event.pointerType === "touch") return;
+        setAnchor({ x: event.clientX, y: event.clientY });
+        showTooltip();
+      }}
+      onPointerMove={(event) => {
+        if (tooltipVisible && event.pointerType !== "touch") {
+          setAnchor({ x: event.clientX, y: event.clientY });
+        }
+      }}
+      onPointerLeave={hideTooltip}
+      onMouseLeave={() => {
+        if (!playerControlsUsed.current) pauseMusic();
+      }}
+      onFocus={(event) => {
+        if (!event.target.classList.contains("portrait-media")) return;
+        const bounds = event.target.getBoundingClientRect();
+        setAnchor({ x: bounds.left + bounds.width / 2, y: bounds.top });
+        showTooltip();
+      }}
+      onBlur={(event) => {
+        hideTooltip();
+        if (!event.currentTarget.contains(event.relatedTarget) && !playerControlsUsed.current) pauseMusic();
+      }}
+      onKeyDown={(event) => { if (event.key === "Escape") hideTooltip(); }}
+    >
+      {/* React puts this in the initial document head, before hydration starts. */}
+      <link rel="preload" as="script" href={SPOTIFY_IFRAME_API_URL} media={animationQuery} />
+      <div className="portrait-artwork">
+      {unavailable || !animationEnabled ? (
+        <Image src="/images/medellin-poster-video.png" alt={description} aria-describedby={tooltipVisible ? tooltipId : undefined} width={544} height={720} unoptimized className="portrait-media" />
+      ) : (
+        <video
+          className="portrait-media"
+          width={544}
+          height={720}
+          poster="/images/medellin-poster-video.png"
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          aria-label={`${description} Play or pause music.`}
+          role="button"
+          aria-pressed={musicPlaying}
+          aria-describedby={tooltipVisible ? tooltipId : undefined}
+          tabIndex={0}
+          onMouseEnter={(event) => {
+            play(event.currentTarget);
+            if (!playerControlsUsed.current) startMusic();
+          }}
+          onMouseLeave={(event) => {
+            event.currentTarget.pause();
+          }}
+          onFocus={(event) => {
+            play(event.currentTarget);
+            if (!playerControlsUsed.current && event.currentTarget.matches(":focus-visible")) startMusic();
+          }}
+          onBlur={(event) => {
+            event.currentTarget.pause();
+          }}
+          onClick={toggleMusic}
+          onKeyDown={(event) => {
+            if (event.key === "Enter" || event.key === " ") {
+              event.preventDefault();
+              if (!event.repeat) toggleMusic();
+            }
+          }}
+          onError={() => setUnavailable(true)}
+        >
+          <source src="/images/medellin-portrait.mp4" type="video/mp4" />
+        </video>
+      )}
+      {animationEnabled && !unavailable && (
+        <div className="portrait-player-overlay" onPointerEnter={hideTooltip} onFocus={hideTooltip}>
+          <PortraitPlayer
+            ready={musicReady}
+            playing={musicPlaying}
+            starting={musicStarting}
+            stalled={musicStalled}
+            unavailable={musicUnavailable}
+            position={musicPosition}
+            duration={musicDuration}
+            track={musicTrack}
+            canSkip={canSkipMusic}
+            onToggle={() => {
+              playerControlsUsed.current = true;
+              toggleMusic();
+            }}
+            onPrevious={() => {
+              playerControlsUsed.current = true;
+              previousMusic();
+            }}
+            onNext={() => {
+              playerControlsUsed.current = true;
+              nextMusic();
+            }}
+          />
+        </div>
+      )}
+      </div>
+      <a
+        className="portrait-spotify-link social-icon"
+        href={site.spotifyPlaylistUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Open Spotify playlist (opens in a new tab)"
+        title="Listen on Spotify"
+        onPointerEnter={hideTooltip}
+        onFocus={hideTooltip}
+      >
+        <FaSpotify size={20} aria-hidden="true" />
+      </a>
+      {animationEnabled && !unavailable && (
+        <div ref={musicHostRef} className="portrait-audio" aria-hidden="true" inert />
+      )}
+      {tooltipVisible && createPortal(
+        <span ref={tooltipRef} id={tooltipId} role="tooltip" className="portrait-tooltip">
+          Medellin, Colombia
+          {musicUnavailable && " · Music unavailable"}
+        </span>,
+        document.body,
+      )}
+    </figure>
+  );
+}

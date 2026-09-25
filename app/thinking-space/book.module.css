@@ -1,0 +1,53 @@
+/* Only book geometry, materials, lighting, and interaction effects live here.
+   Page layout and reading typography use Tailwind in the TSX components. */
+.object { perspective: 1200px; }
+.object::before { content: ''; position: absolute; bottom: 5px; left: 14%; width: 78%; height: 12px; border-radius: 50%; background: radial-gradient(ellipse, #2a2c2445, transparent 70%); filter: blur(3px); transform: scaleY(.55); opacity: .65; transition: opacity .5s; }
+.volume { --book-w: 210px; --book-h: calc(var(--book-w) * var(--cover-ratio, 1.5)); --book-d: 40px; width: var(--book-w); height: var(--book-h); position: relative; transform-style: preserve-3d; flex-shrink: 0; }
+.shelfVolume { --book-w: 134px; --book-h: calc(var(--book-w) * var(--cover-ratio, 1.5)); --book-d: 24px; transform: rotateY(-25deg) rotateZ(var(--lean)); transform-origin: 50% 100%; transition: transform .65s cubic-bezier(.2,.75,.25,1); }
+.shelfLink:hover .shelfVolume, .shelfLink:focus-visible .shelfVolume { transform: translateY(-10px) rotateX(2deg) rotateY(-8deg); }
+.shelfLink:hover .object::before { opacity: .4; }
+.face { position: absolute; background: var(--color); color: var(--foil); backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+.front, .back { inset: 0; border-radius: 2px 3px 3px 2px; box-shadow: inset 0 0 0 1px #ffffff18; }
+.front { transform: translateZ(calc(var(--book-d)/2)); }
+.coverArt { display: block; width: 100%; height: 100%; object-fit: fill; border-radius: inherit; user-select: none; -webkit-user-drag: none; }
+.front::after { content: ''; position: absolute; inset: 0; border-radius: inherit; background: linear-gradient(90deg, #0004, transparent 2%, #ffffff0a 3%, transparent 6%, transparent 98%, #fff2); box-shadow: inset 0 1px 0 #ffffff25, inset 0 -1px 0 #0003; pointer-events: none; }
+.groove { position: absolute; top: 0; bottom: 0; left: 4.5%; width: 1.1%; background: linear-gradient(90deg, #00000019, #ffffff0a); box-shadow: -1px 0 1px #00000008; }
+.back { transform: rotateY(180deg) translateZ(calc(var(--book-d)/2)); background: linear-gradient(110deg, #ffffff08, #0000000c), var(--color); padding: 32px 28px; display: flex; flex-direction: column; align-items: center; justify-content: space-between; text-align: center; }
+.imprint { font: 8px/1.5 ui-monospace, monospace; letter-spacing: 2px; text-transform: uppercase; }
+.backThought { font: italic 20px/1.5 Georgia, serif; }
+.back svg { width: 67px; height: 67px; }
+.spine { width: var(--book-d); height: var(--book-h); left: 0; top: 0; transform: translateX(-50%) rotateY(-90deg); border-radius: 2px; background: linear-gradient(90deg, #0003, #ffffff0c 35%, #0002), var(--color); display: flex; justify-content: space-between; align-items: center; padding: 23px 0; writing-mode: vertical-rl; font: 12px Georgia, serif; letter-spacing: .4px; }
+.spine small { font: 9px ui-monospace, monospace; letter-spacing: 2px; }
+.pages { width: calc(var(--book-d) - 5px); height: calc(var(--book-h) - 8px); right: 3px; top: 4px; transform: translateX(50%) rotateY(90deg); border-radius: 1px; background: linear-gradient(90deg, #0000000d, transparent 25%, #ffffff30 75%, #00000014), repeating-linear-gradient(90deg, #e9e3d4 0 1px, #cec8bc 1px 1.35px, #eee8db 1.35px 2.6px); }
+.top, .bottom { width: calc(var(--book-w) - 7px); height: calc(var(--book-d) - 5px); left: 3px; background: repeating-linear-gradient(0deg, #e3ddce 0 1px, #cfc8b9 1px 1.3px, #ede7da 1.3px 2.5px); }
+.top { top: 4px; transform: translateY(-50%) rotateX(90deg); }
+.bottom { bottom: 4px; transform: translateY(50%) rotateX(-90deg); }
+.shelfVolume .spine { font-size: 9px; padding: 17px 0; }
+.shelfVolume .spine small { font-size: 7px; }
+.shelfVolume .back { padding: 18px; }
+.shelfVolume .backThought { font-size: 14px; }
+.shelfVolume .back svg { width: 40px; height: 40px; }
+
+.stage { perspective: 1400px; touch-action: pan-y; }
+.stage::before { content: ''; position: absolute; width: 90%; height: 80%; background: radial-gradient(ellipse, #d9d6bc22, transparent 68%); pointer-events: none; }
+.shadow { position: absolute; width: 215px; height: 21px; bottom: 10px; background: radial-gradient(ellipse, #39301b3b, transparent 70%); filter: blur(7px); opacity: .7; transform: rotate(-8deg); pointer-events: none; }
+.interactiveVolume { transform: rotateX(4deg) rotateY(-26deg); cursor: grab; touch-action: none; user-select: none; -webkit-user-select: none; }
+.dragging, .dragging * { cursor: grabbing !important; }
+.stage:focus-visible { outline: 1px solid #aaa; outline-offset: 5px; border-radius: 3px; }
+.pointerFocused:focus-visible { outline: none; }
+
+@media (min-width: 1350px) {
+  .shelfVolume { --book-w: 148px; }
+}
+@media (max-width: 1100px) {
+  .interactiveVolume { --book-w: 180px; }
+}
+@media (max-width: 600px) {
+  .shelfVolume { --book-w: 132px; }
+  .interactiveVolume { --book-w: 195px; }
+  .shadow { bottom: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .shelfVolume { transition: none; }
+  .shelfLink:hover .shelfVolume, .shelfLink:focus-visible .shelfVolume { transform: rotateY(-25deg); }
+}
