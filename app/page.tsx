@@ -1,45 +1,44 @@
+import { readFile } from "node:fs/promises";
+import path from "node:path";
 import Link from "next/link";
+import Markdown from "react-markdown";
 import Portrait from "./portrait";
 import type { IconType } from "react-icons";
-import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { FaEnvelope, FaGithub, FaLinkedin } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
-import { bio, site, type BioSegment, type SocialLabel } from "@/lib/content";
+import { site, type SocialLabel } from "@/lib/content";
 
 const icons: Record<SocialLabel, IconType> = {
   GitHub: FaGithub,
   LinkedIn: FaLinkedin,
   X: FaXTwitter,
+  Email: FaEnvelope,
 };
 
-function Segment({ segment }: { segment: BioSegment }) {
-  if (typeof segment === "string") {
-    return <>{segment}</>;
-  }
-  return (
-    <a href={segment.href} className="bio-link">
-      {segment.text}
-    </a>
+export default async function Home() {
+  const bio = await readFile(
+    path.join(process.cwd(), "content/bio.md"),
+    "utf8",
   );
-}
 
-export default function Home() {
   return (
     <div className="home-layout">
       <div className="home-copy">
         <div className="anim d1 mb-12">
-          <div className="flex items-center justify-between mb-2">
+          <div className="flex items-center justify-between">
             <h1 className="text-[22px] tracking-[-0.02em] leading-none">
               {site.name}
             </h1>
             <div className="flex items-center gap-2">
               {site.socials.map(({ label, href }) => {
                 const Icon = icons[label];
+                const external = !href.startsWith("mailto:");
                 return (
                   <a
                     key={label}
                     href={href}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    target={external ? "_blank" : undefined}
+                    rel={external ? "noopener noreferrer" : undefined}
                     aria-label={label}
                     className="social-icon"
                   >
@@ -49,21 +48,22 @@ export default function Home() {
               })}
             </div>
           </div>
-          <p className="text-[18px] leading-[1.75]" style={{ color: "var(--fg)" }}>
-            {site.emailText}
-          </p>
         </div>
         <div
           className="anim d2 space-y-5 text-[18px] leading-[1.75] mb-16"
           style={{ color: "var(--fg)" }}
         >
-          {bio.map((paragraph, i) => (
-            <p key={i}>
-              {paragraph.map((segment, j) => (
-                <Segment key={j} segment={segment} />
-              ))}
-            </p>
-          ))}
+          <Markdown
+            components={{
+              a: ({ href, children }) => (
+                <a href={href} className="bio-link">
+                  {children}
+                </a>
+              ),
+            }}
+          >
+            {bio}
+          </Markdown>
         </div>
         <nav className="anim d3 flex flex-wrap items-center gap-x-6 gap-y-3">
           <Link href="/thinking-space" className="nav-link text-[16px]">
