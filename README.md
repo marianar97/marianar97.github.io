@@ -1,4 +1,4 @@
-# marianar.tech
+# marianaramirezduque.com
 
 Personal website for Mariana Ramirez Duque. Two pages: a home page with bio
 and portrait, and `/links`.

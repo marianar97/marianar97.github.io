@@ -13,8 +13,6 @@
 # testing
 /coverage
 
-# superpowers (task automation)
-.superpowers/
 
 # next.js
 /.next/
